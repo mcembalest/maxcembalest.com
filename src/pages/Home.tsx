@@ -40,7 +40,7 @@ function Home() {
                 </div>
                 <div className="bio-text">
                   <p>
-                    The main challenge faced by Nomic AI was making embeddings - the core machine learning technology at the heart of retrieval, clustering, and analysis - less of a confusing topic for developers in order to enable Nomic's products to be used by a wider audience.
+                    The main challenge faced by Nomic AI was demonstrating the value of embeddings: they are the core machine learning technology behind Nomic's retrieval, clustering, and data analysis products. They can be a confusing topic for developers, so Nomic hired me to make these models and their applications understood by a wider audience.
                   </p>
                   <p>
                     I worked on Nomic's entire suite of models and products - benchmarking the models, building the APIs and Python clients, and presenting end-to-end workflows to productionize Nomic's models and tools into deployed applications.
