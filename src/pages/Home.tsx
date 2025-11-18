@@ -8,12 +8,13 @@ function Home() {
       </header>
 
       <main>
+        <h2>Bio</h2>
         <section className="professional-section">
           <div className="bio-content">
             <img src="/personal/max_tokyo_full.jpg" alt="Max in Tokyo" className="profile-image" />
             <div className="bio-text">
               <p>
-                Hi, I'm Max. I'm an AI researcher with 3 years of industry experience making AI more defensible and explainable.
+                Hi, I'm Max. I'm an AI developer & researcher with 3 years of industry experience making AI more defensible and explainable.
               </p>
 
               <p>
