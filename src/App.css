@@ -1,0 +1,52 @@
+.app {
+  min-height: 100vh;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.nav-brand {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #333;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+header {
+  margin-bottom: 3rem;
+}
+
+main {
+  margin-bottom: 3rem;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+

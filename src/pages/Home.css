@@ -1,0 +1,100 @@
+.home-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.home-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.professional-section {
+  margin-bottom: 4rem;
+}
+
+.bio-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.profile-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.bio-text {
+  flex: 1;
+}
+
+.bio-text p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.bio-text h3 {
+  font-size: 1.3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.nomic-images {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.nomic-images img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid #eee;
+  transition: transform 0.2s ease;
+}
+
+.nomic-images img:hover {
+  transform: scale(1.02);
+}
+
+@media (min-width: 768px) {
+  .nomic-images {
+    max-width: 300px;
+    /* Prevent images from shrinking too much */
+    flex-shrink: 0;
+  }
+}
+
+.personal-section {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 2px solid #e0e0e0;
+}
+
+.personal-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.music-image {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 4px;
+}
+
+@media (min-width: 768px) {
+  .bio-content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .profile-image {
+    max-width: 300px;
+  }
+}

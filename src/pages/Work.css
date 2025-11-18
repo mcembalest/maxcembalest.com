@@ -1,0 +1,58 @@
+.work-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.work-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.work-container h2 {
+  font-size: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #333;
+  padding-bottom: 0.5rem;
+}
+
+.work-container h3 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.work-item {
+  margin-bottom: 3rem;
+}
+
+.work-item p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.work-item img {
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+  display: block;
+}
+
+.work-item a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.work-item a:hover {
+  text-decoration: underline;
+}
+
+.work-item code {
+  background-color: #f4f4f4;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
