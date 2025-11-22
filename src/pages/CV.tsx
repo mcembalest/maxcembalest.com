@@ -1,9 +1,9 @@
-import './Work.css'
+import './CV.css'
 
-function Work() {
+function CV() {
   return (
     <div className="work-container">
-      <h1>Work</h1>
+      <h1>CV</h1>
 
       <h2>2023</h2>
 
@@ -82,25 +82,28 @@ function Work() {
       </section>
 
       <section className="work-item">
-        <h3>Interactive Congressional Gerrymandering Explorer</h3>
+        <h3>Interactive Web Applications for Skew The Script</h3>
         <p>
-          For <a href="https://skewthescript.org/">Skew The Script</a>, I co-developed an AP Statistics lesson on 
-          sampling and p-values, applied to the problem of evaluating the level of gerrymandering of congressional maps 
-          relative to the other valid maps that could have been drawn (using the{' '}
-          <a href="https://alarm-redist.org/fifty-states/">redist</a> simulator).
+          For <a href="https://skewthescript.org/">Skew The Script</a>, I co-developed two AP Statistics lessons on 
+          distributional sampling and hypothesis testing, applied to important real-world problems that challenge students' to think critically about statistical inference.
         </p>
+        <h4>Congressional Gerrymandering Explorer</h4>
         <p>
-          You can visit the interactive applet{' '}
-          <a href="https://skew-the-script.github.io/Gerrymandering/#firstPage">here</a> and see how the current 
-          congressional map for your state compares to the distribution of other maps that could have been drawn!
+          The <a href="https://skew-the-script.github.io/Gerrymandering/#firstPage">gerrymandering app</a> shows the current 
+          congressional map for each US state and compares it to the distribution of other maps that could have been drawn.
         </p>
-        <img src="/skewthescript/gerry.png" alt="gerrymandering level of New York state" />
+        <img src="/skewthescript/STS-gerrymandering.gif" alt="gerrymandering level of New York and Maryland" />
+        <h4>Central Limit Theorem Demonstration</h4>
+        <p>
+          The <a href="https://skew-the-script.github.io/CentralLimitTheorem/#firstPage">central limit theorem app</a> shows how the sample means of a dataset converge to a normal distribution as the sample size increases.
+        </p>
+        <img src="/skewthescript/STS-sampling.gif" alt="central limit theorem demonstration" />
       </section>
 
       <h2>2021</h2>
 
       <section className="work-item">
-        <h3>Geospatial Modeling for Lead Pipe Removal</h3>
+        <h3>Masters Capstone: Geospatial Modeling for Lead Pipe Removal</h3>
         <p>
           For my capstone research class, I worked with the organization{' '}
           <a href="https://blueconduit.com/">BlueConduit</a> on a{' '}
@@ -129,5 +132,5 @@ function Work() {
   )
 }
 
-export default Work
+export default CV
 

@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Home from './pages/Home'
-import Work from './pages/Work'
+import CV from './pages/CV'
 import './App.css'
 
 function App() {
@@ -11,13 +11,13 @@ function App() {
           <Link to="/" className="nav-brand">Max Cembalest</Link>
           <div className="nav-links">
             <Link to="/">Home</Link>
-            <Link to="/work">Work</Link>
+            <Link to="/cv">CV</Link>
           </div>
         </nav>
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/work" element={<Work />} />
+          <Route path="/cv" element={<CV />} />
         </Routes>
       </div>
     </Router>

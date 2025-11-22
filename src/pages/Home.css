@@ -45,7 +45,7 @@
 .nomic-images {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 4rem;
   width: 100%;
   max-width: 400px;
 }
@@ -64,6 +64,34 @@
 
 @media (min-width: 768px) {
   .nomic-images {
+    max-width: 300px;
+    /* Prevent images from shrinking too much */
+    flex-shrink: 0;
+  }
+}
+
+.arthur-images {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.arthur-images img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid #eee;
+  transition: transform 0.2s ease;
+}
+
+.arthur-images img:hover {
+  transform: scale(1.02);
+}
+
+@media (min-width: 768px) {
+  .arthur-images {
     max-width: 300px;
     /* Prevent images from shrinking too much */
     flex-shrink: 0;
