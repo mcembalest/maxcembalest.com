@@ -14,7 +14,7 @@ function Home() {
             <img src="/personal/max_tokyo_full.jpg" alt="Max in Tokyo" className="profile-image" />
             <div className="bio-text">
               <p>
-                Hi, I'm Max. I'm an AI developer &amp; researcher based in NYC with 3 years of experience making AI more defensible and explainable. I've worked for <a href="https://www.nomic.ai/">Nomic AI</a> and <a href="https://www.arthur.ai/">Arthur AI</a>.
+                Hi, I'm Max. I'm an AI engineer &amp; researcher based in NYC with 3+ years of industry experience making AI more defensible and explainable. I've worked for <a href="https://www.nomic.ai/">Nomic AI</a> and <a href="https://www.arthur.ai/">Arthur AI</a>. I've had my research published at ICLR, AAAI/ACM, and IEEE.
               </p>
 
               <p>
@@ -35,7 +35,8 @@ function Home() {
           <div className="bio-content">
             <div className="nomic-images">
               <img src="/nomic/nomic-embed-v2-benchmark1.png" alt="Nomic Embed v2 Benchmark 1" />
-              <img src="/nomic/nomic-mnist-training-dynamics.png" alt="Nomic MNIST Training Dynamics" />
+              <img src="https://assets.nomicatlas.com/mnist-training-embeddings-umap-short.gif" alt="Nomic MNIST Training Dynamics" />
+              <img src="/nomic/nomic-docs-guides.png" alt="Nomic Docs" />
             </div>
             <div className="bio-text">
               <h3>Making Embeddings Usable & Understandable for Developers</h3>
@@ -61,11 +62,12 @@ function Home() {
           <div className="arthur-images">
               <img src="/arthur/LLM-eval-webinar-1.png" alt="Arthur LLM Evaluation Webinar" />
               <img src="/arthur/LLM-eval-webinar-2.png" alt="Arthur LLM Evaluation Webinar" />
-              <img src="/arthur/shapley-residuals-medium.png" alt="Arthur Shapley Residuals Article" />
+              <img src="/arthur/pear-loss.png" alt="Arthur PEAR Loss" />
+              <img src="/arthur/shapresid-eq.png" alt="Arthur Shapley Residuals Article" />
             </div>
             <div className="bio-text">
               <p>
-                I worked for two years as a researcher at Arthur, an AI security and observability company, during the transition from classical ML to generative AI in enterprise deployments. I built interpretability systems for scalable model auditing, developed security systems to detect & mitigate against LLM failure modes like prompt injections and hallucinations, and had my work published at IEEE and ICLR.
+                I worked for two years as a researcher at Arthur, an AI security and observability company, during the transition from classical ML to generative AI in enterprise deployments. I built interpretability systems for scalable model auditing, developed security systems to detect & mitigate against LLM failure modes like prompt injections and hallucinations.
               </p>
               <h3>Monitoring, Evaluation, & Security for the LLM Era</h3>
               <p>
