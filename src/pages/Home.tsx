@@ -24,6 +24,8 @@ function Home() {
               <p>
                 Before studying and working in AI, I taught calculus and computer science at <a href="https://www.africanleadershipacademy.org/">African Leadership Academy</a>, a high school in Johannesburg, South Africa.
               </p>
+
+              <p>I graduated Phi Beta Kappa from Wesleyan University in 2018 with a BA in Mathematics and Computer Science.</p>
             </div>
           </div>
         </section>
