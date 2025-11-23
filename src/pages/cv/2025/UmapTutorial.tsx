@@ -13,8 +13,8 @@ function UmapTutorial() {
           Authored tutorial accepted to the official UMAP documentation on visualizing and analyzing the training
           dynamics of neural networks. The tutorial demonstrates training a convolutional neural network on MNIST,
           extracting high-dimensional embeddings from test images at each epoch, and utilizing UMAP to project these
-          evolving embeddings into 2D space. Leveraged the Nomic Atlas platform to create a large-scale, interactive
-          web visualization for exploring how the model learned to separate digit classes over time.
+          evolving embeddings into 2D space. Leveraged the Nomic Atlas platform to create an interactive
+          web visualization to explore how the model learns representations that partition digit classes in embedding space during the course of training.
         </p>
         <p>
           <a href="https://umap-learn.readthedocs.io/en/latest/nomic_atlas_visualizing_mnist_training_dynamics.html#visualizing-mnist-training-dynamics-with-nomic-atlas">
