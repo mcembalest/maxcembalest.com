@@ -6,12 +6,12 @@ function LlmExperimentationEcosystem() {
     <div className="work-container">
       <Link to="/cv">← Back to CV</Link>
 
-      <h1>Article on LLM Experimentation Ecosystem</h1>
+      <h1>Applied Research on LLM Experimentation Ecosystem</h1>
 
       <section className="work-item">
         <p>
           Authored a <a href="https://www.arthur.ai/blog/the-ultimate-guide-to-llm-experimentation-and-development-in-2024">
-            comprehensive technical guide
+           technical article
           </a> detailing the end-to-end lifecycle for LLM experimentation and
           development. Analyzed the "open vs. closed" and "small vs. big" model ecosystem, including quantitative
           analysis of GPT-4's performance against competitors. Curated best-in-class tools and techniques for
@@ -19,9 +19,17 @@ function LlmExperimentationEcosystem() {
           and structured LLM outputs.
         </p>
         <img src="/arthur/LLM-experimentation-dspy.png" alt="LLM Experimentation Guide" />
-        <p>
-           <a href="https://www.youtube.com/watch?v=9PGuvs_z4Pk">Webinar hosted by Arthur AI</a>
-        </p>
+        <div style={{ margin: '1.5em 0' }}>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/9PGuvs_z4Pk"
+            title="Webinar hosted by Arthur AI"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
       </section>
     </div>
   )

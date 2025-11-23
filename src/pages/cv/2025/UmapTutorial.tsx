@@ -6,7 +6,7 @@ function UmapTutorial() {
     <div className="work-container">
       <Link to="/cv">← Back to CV</Link>
 
-      <h1>Tutorial on Visualizing Training Dynamics with UMAP</h1>
+      <h1>Tutorial on Visualizing Neural Network Training Dynamics with UMAP</h1>
 
       <section className="work-item">
         <p>

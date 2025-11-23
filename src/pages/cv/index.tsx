@@ -19,7 +19,7 @@ function CVIndex() {
       <Link to="/cv/2025/umap-tutorial" className="cv-row">
         <img src="https://assets.nomicatlas.com/mnist-training-embeddings-umap-short.gif" alt="UMAP Tutorial" className="cv-thumbnail" />
         <div className="cv-content">
-          <h3>Tutorial on Visualizing Training Dynamics with UMAP</h3>
+          <h3>Tutorial on Visualizing Neural Network Training Dynamics with UMAP</h3>
           <p>Contributed a guide to the official UMAP documentation demonstrating neural network training visualization using Nomic Atlas.</p>
         </div>
       </Link>
@@ -45,7 +45,7 @@ function CVIndex() {
       <Link to="/cv/2024/llm-experimentation" className="cv-row">
         <img src="arthur/llm-stats-coding-eval.png" alt="LLM Guide" className="cv-thumbnail" />
         <div className="cv-content">
-          <h3>Article on LLM Experimentation Ecosystem</h3>
+          <h3>Applied Research on LLM Experimentation Ecosystem</h3>
           <p>Comprehensive technical guide covering end-to-end LLM lifecycle, model ecosystem analysis, benchmarking, and prompt engineering techniques.</p>
         </div>
       </Link>
