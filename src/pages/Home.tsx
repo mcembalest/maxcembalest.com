@@ -35,7 +35,8 @@ function Home() {
           <div className="bio-content">
             <div className="nomic-images">
               <img src="/nomic/nomic-embed-v2-benchmark1.png" alt="Nomic Embed v2 Benchmark 1" />
-              <img src="/nomic/nomic-mnist-training-dynamics.png" alt="Nomic MNIST Training Dynamics" />
+              <img src="https://assets.nomicatlas.com/mnist-training-embeddings-umap-short.gif" alt="Nomic MNIST Training Dynamics" />
+              <img src="/nomic/nomic-docs-guides.png" alt="Nomic Docs" />
             </div>
             <div className="bio-text">
               <h3>Making Embeddings Usable & Understandable for Developers</h3>
@@ -61,6 +62,7 @@ function Home() {
           <div className="arthur-images">
               <img src="/arthur/LLM-eval-webinar-1.png" alt="Arthur LLM Evaluation Webinar" />
               <img src="/arthur/LLM-eval-webinar-2.png" alt="Arthur LLM Evaluation Webinar" />
+              <img src="/arthur/pear-loss.png" alt="Arthur PEAR Loss" />
               <img src="/arthur/shapresid-eq.png" alt="Arthur Shapley Residuals Article" />
             </div>
             <div className="bio-text">

@@ -45,7 +45,7 @@
 .nomic-images {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 2rem;
   width: 100%;
   max-width: 400px;
 }
