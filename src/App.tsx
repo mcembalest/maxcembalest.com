@@ -47,12 +47,12 @@ function App() {
           <Route path="/cv/2025/odsc-nomic" element={<OdscNomic />} />
           <Route path="/cv/2025/umap-tutorial" element={<UmapTutorial />} />
           <Route path="/cv/2025/nomic-documentation" element={<NomicDocumentation />} />
-          <Route path="/cv/2024/odsc-arthur" element={<OdscArthurLLM />} />
+          <Route path="/cv/2024/odsc-arthur-llm" element={<OdscArthurLLM />} />
           <Route path="/cv/2024/llm-experimentation" element={<LlmExperimentationEcosystem />} />
           <Route path="/cv/2024/pytorch-gnn" element={<PytorchGnn />} />
           <Route path="/cv/2023/llm-evaluation" element={<LlmEvaluation />} />
           <Route path="/cv/2023/pear" element={<Pear />} />
-          <Route path="/cv/2023/odsc-arthur" element={<OdscArthurPear />} />
+          <Route path="/cv/2023/odsc-arthur-pear" element={<OdscArthurPear />} />
           <Route path="/cv/2022/tensions" element={<Tensions />} />
           <Route path="/cv/2022/shapley-residuals" element={<ShapleyResiduals />} />
           <Route path="/cv/2022/skew-the-script" element={<SkewTheScript />} />

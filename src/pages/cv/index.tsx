@@ -19,7 +19,7 @@ function CVIndex() {
       <Link to="/cv/2025/umap-tutorial" className="cv-row">
         <img src="https://assets.nomicatlas.com/mnist-training-embeddings-umap-short.gif" alt="UMAP Tutorial" className="cv-thumbnail" />
         <div className="cv-content">
-          <h3>Visualizing Training Dynamics with UMAP</h3>
+          <h3>Tutorial on Visualizing Training Dynamics with UMAP</h3>
           <p>Contributed a guide to the official UMAP documentation demonstrating neural network training visualization using Nomic Atlas.</p>
         </div>
       </Link>
@@ -58,7 +58,7 @@ function CVIndex() {
         </div>
       </Link>
 
-      <Link to="/cv/2024/odsc-arthur" className="cv-row">
+      <Link to="/cv/2024/odsc-arthur-llm" className="cv-row">
         <img src="odsc.png" alt="ODSC Arthur" className="cv-thumbnail" />
         <div className="cv-content">
           <h3>Speaker @ ODSC East 2024</h3>
@@ -84,7 +84,7 @@ function CVIndex() {
         </div>
       </Link>
 
-      <Link to="/cv/2024/odsc-arthur" className="cv-row">
+      <Link to="/cv/2023/odsc-arthur-pear" className="cv-row">
         <img src="odsc.png" alt="ODSC Arthur" className="cv-thumbnail" />
         <div className="cv-content">
           <h3>Speaker @ ODSC East 2023</h3>
@@ -123,7 +123,7 @@ function CVIndex() {
       <Link to="/cv/2021/masters-capstone" className="cv-row">
         <img src="harvardcapstone/diffusion.png" alt="Capstone" className="cv-thumbnail" />
         <div className="cv-content">
-          <h3>Masters Capstone: Geospatial Modeling for Lead Pipe Removal</h3>
+          <h3>Master's Capstone: Geospatial Modeling for Lead Pipe Removal</h3>
           <p>Developed geospatial model to identify likely locations of lead pipes in Flint, Michigan and prioritize digging efforts in the most urgent areas.</p>
         </div>
       </Link>
