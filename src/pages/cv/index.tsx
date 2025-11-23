@@ -46,7 +46,7 @@ function CVIndex() {
         <img src="arthur/llm-stats-coding-eval.png" alt="LLM Guide" className="cv-thumbnail" />
         <div className="cv-content">
           <h3>Applied Research on LLM Experimentation Ecosystem</h3>
-          <p>Comprehensive technical guide covering end-to-end LLM lifecycle, model ecosystem analysis, benchmarking, and prompt engineering techniques.</p>
+          <p>Conducted research on the end-to-end lifecycle for LLM experimentation and development, including model selection, prompting, tool use, inference acceleration, structured outputs, and more.</p>
         </div>
       </Link>
 
