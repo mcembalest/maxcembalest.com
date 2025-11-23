@@ -10,8 +10,8 @@ function SkewTheScript() {
 
       <section className="work-item">
         <p>
-          For <a href="https://skewthescript.org/">Skew The Script</a>, I co-developed two AP Statistics lessons on
-          distributional sampling and hypothesis testing, applied to important real-world problems that challenge students' to think critically about statistical inference.
+          For <a href="https://skewthescript.org/">Skew The Script</a>, I worked with its founder Dashiell Young-Saver (a classmate from my Masters @ Harvard IACS) to develop interactive web applications to help make AP Statistics lessons more engaging and relevant to students. 
+          We developed two lessons on distributional sampling and hypothesis testing, applied to important real-world problems that challenge students' to think critically about statistical inference.
         </p>
         <h4>Congressional Gerrymandering Explorer</h4>
         <p>

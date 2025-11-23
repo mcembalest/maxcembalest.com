@@ -6,11 +6,11 @@ function ShapleyResiduals() {
     <div className="work-container">
       <Link to="/cv">← Back to CV</Link>
 
-      <h1>Tutorial on Shapley Residuals</h1>
+      <h1>Article on Shapley Values & Residuals</h1>
 
       <section className="work-item">
         <p>
-          After my first few months researching machine learning interpretability & explainability at Arthur, I wrote a
+          I researched machine learning interpretability & explainability at Arthur, focusing on the use of post-hoc attribution methods like Shapley values. I wrote a
           short explainer on Shapley values and a tutorial for calculating their residuals for{' '}
           <a href="https://towardsdatascience.com/shapley-residuals-measuring-the-limitations-of-shapley-values-for-explainability-d9cdc3582522">
             TowardsDataScience
@@ -20,11 +20,7 @@ function ShapleyResiduals() {
             Kumar et. al.
           </a>
         </p>
-        <p>
-          This post is aimed at a general data science practitioner audience to explain the limitations of Shapley
-          values at capturing feature importance for complex models.
-        </p>
-        <img src="/arthur/shapley_residuals.png" alt="shapley_residuals" />
+        <img src="/arthur/shapresid-eq.png" alt="shapley_residuals" />
       </section>
     </div>
   )

@@ -11,16 +11,8 @@ function CVIndex() {
       <Link to="/cv/2025/style-outweighs-substance" className="cv-row">
         <img src="arthur/llm-judge.png" alt="Style Outweighs Substance" className="cv-thumbnail" />
         <div className="cv-content">
-          <h3>[Published @ ICLR 2025] Style Outweighs Substance</h3>
-          <p>Published research critically analyzing LLM-judge failure modes for AI alignment. Developed SOS-BENCH meta-benchmark to provide reliable measurements with ground truth.</p>
-        </div>
-      </Link>
-
-      <Link to="/cv/2025/odsc-nomic" className="cv-row">
-        <img src="odsc.png" alt="ODSC Nomic" className="cv-thumbnail" />
-        <div className="cv-content">
-          <h3>Speaker @ ODSC East 2025</h3>
-          <p>Delivered a talk at the Open Data Science Conference (May 2025) detailing Nomic's pre-training and post-training methods for embedding models.</p>
+          <h3>[Published @ ICLR 2025] Style Outweighs Substance: Failure Modes of LLM Judges in Alignment Benchmarking</h3>
+          <p>Published research analyzing LLM-judge failure modes for AI alignment. Developed SOS-BENCH benchmark to provide more reliable measurements of model behavior.</p>
         </div>
       </Link>
 
@@ -33,28 +25,36 @@ function CVIndex() {
       </Link>
 
       <Link to="/cv/2025/nomic-documentation" className="cv-row">
-        <img src="nomic/nomic-docs.png" alt="Nomic Docs" className="cv-thumbnail" />
+        <img src="nomic/nomic-docs-guides.png" alt="Nomic Docs" className="cv-thumbnail" />
         <div className="cv-content">
-          <h3>Nomic API Platform Documentation</h3>
-          <p>Revamped the Nomic API Platform Documentation, managing technical content for ML engineers on embeddings, vector search, dimensionality reduction, and other applications.</p>
+          <h3>Nomic AI Platform Documentation</h3>
+          <p>Owner of the technical guides, developer SDKs, and explanatory videos for the Nomic AI Platform. I was responsible for explaining Nomic's embedding models and overall product capabilities into a comprehensive library</p>
+        </div>
+      </Link>
+
+      <Link to="/cv/2025/odsc-nomic" className="cv-row">
+        <img src="odsc.png" alt="ODSC Nomic" className="cv-thumbnail" />
+        <div className="cv-content">
+          <h3>Speaker @ ODSC East 2025</h3>
+          <p>Delivered a talk at the Open Data Science Conference (May 2025) detailing Nomic's pre-training and post-training methods for embedding models.</p>
         </div>
       </Link>
 
       <h2>2024</h2>
 
-      <Link to="/cv/2024/llm-experimentation-guide" className="cv-row">
+      <Link to="/cv/2024/llm-experimentation" className="cv-row">
         <img src="arthur/llm-stats-coding-eval.png" alt="LLM Guide" className="cv-thumbnail" />
         <div className="cv-content">
-          <h3>The Ultimate Guide to LLM Experimentation and Development</h3>
+          <h3>Article on LLM Experimentation Ecosystem</h3>
           <p>Comprehensive technical guide covering end-to-end LLM lifecycle, model ecosystem analysis, benchmarking, and prompt engineering techniques.</p>
         </div>
       </Link>
 
-      <Link to="/cv/2024/llm-evaluation-webinars" className="cv-row">
-        <img src="arthur/LLM-eval-webinar-1.png" alt="LLM Evaluation" className="cv-thumbnail" />
+      <Link to="/cv/2024/pytorch-gnn" className="cv-row">
+        <img src="https://raw.githubusercontent.com/mcembalest/GNN/main/img/trajectories.gif" alt="GNN" className="cv-thumbnail" />
         <div className="cv-content">
-          <h3>LLM Evaluation Webinar Series</h3>
-          <p>Educational webinar series on evaluating large language models, covering methodologies, benchmarking, and implementation strategies.</p>
+          <h3>Tutorial on Graph Neural Networks & PyTorch Geometric</h3>
+          <p>Code & walkthrough for training graph neural networks using PyTorch Geometric and visualizing learned embeddings during training.</p>
         </div>
       </Link>
 
@@ -76,11 +76,11 @@ function CVIndex() {
         </div>
       </Link>
 
-      <Link to="/cv/2023/tensions" className="cv-row">
-        <img src="arthur/tensions.png" alt="Tensions" className="cv-thumbnail" />
+      <Link to="/cv/2023/llm-evaluation" className="cv-row">
+        <img src="arthur/LLM-eval-webinar-1.png" alt="LLM Evaluation" className="cv-thumbnail" />
         <div className="cv-content">
-          <h3>[Published @ IEEE 2023] Tensions Between the Proxies of Human Values in AI</h3>
-          <p>Position paper on the tradeoffs between fairness, transparency, and privacy in AI. Presented at 2023 IEEE Conference on Secure and Trustworthy Machine Learning.</p>
+          <h3>Applied Research on LLM Evaluation and LLM-as-Judge</h3>
+          <p>Published experiments evaluating large language models, covering methodologies, benchmarking, and implementation strategies.</p>
         </div>
       </Link>
 
@@ -92,21 +92,21 @@ function CVIndex() {
         </div>
       </Link>
 
-      <Link to="/cv/2023/pytorch-gnn" className="cv-row">
-        <img src="https://raw.githubusercontent.com/mcembalest/GNN/main/img/trajectories.gif" alt="GNN" className="cv-thumbnail" />
+      <h2>2022</h2>
+
+      <Link to="/cv/2023/tensions" className="cv-row">
+        <img src="arthur/tensions.png" alt="Tensions" className="cv-thumbnail" />
         <div className="cv-content">
-          <h3>Tutorial: Graph Neural Networks with PyTorch Geometric</h3>
-          <p>Tutorial for training graph neural networks using PyTorch Geometric and visualizing learned embeddings during training.</p>
+          <h3>[Published @ IEEE 2023] Tensions Between the Proxies of Human Values in AI</h3>
+          <p>Position paper on the tradeoffs between fairness, transparency, and privacy in AI. Presented at 2023 IEEE Conference on Secure and Trustworthy Machine Learning.</p>
         </div>
       </Link>
 
-      <h2>2022</h2>
-
       <Link to="/cv/2022/shapley-residuals" className="cv-row">
-        <img src="arthur/shapley_residuals.png" alt="Shapley" className="cv-thumbnail" />
+        <img src="arthur/shapresid-eq.png" alt="Shapley" className="cv-thumbnail" />
         <div className="cv-content">
-          <h3>Tutorial on Shapley Residuals</h3>
-          <p>TowardsDataScience tutorial explaining Shapley values and calculating their residuals to measure explainability limitations.</p>
+          <h3>Article on Shapley Values & Residuals</h3>
+          <p>Article explaining Shapley values and calculating their residuals to measure explainability limitations. Published on TowardsDataScience.</p>
         </div>
       </Link>
 
@@ -114,7 +114,7 @@ function CVIndex() {
         <img src="skewthescript/STS-gerrymandering.gif" alt="Skew The Script" className="cv-thumbnail" />
         <div className="cv-content">
           <h3>Interactive Web Applications for Skew The Script</h3>
-          <p>Co-developed AP Statistics lessons on distributional sampling and hypothesis testing with interactive gerrymandering and CLT demonstrations.</p>
+          <p>Developed interactive web apps to help make AP Statistics lessons more engaging and relevant to students, covering distributional sampling, hypothesis testing, and the Central Limit Theorem.</p>
         </div>
       </Link>
 
@@ -124,7 +124,7 @@ function CVIndex() {
         <img src="harvardcapstone/diffusion.png" alt="Capstone" className="cv-thumbnail" />
         <div className="cv-content">
           <h3>Masters Capstone: Geospatial Modeling for Lead Pipe Removal</h3>
-          <p>Developed geospatially robust model for BlueConduit to identify lead pipes in Flint, Michigan using XGBoost and spatial diffusion.</p>
+          <p>Developed geospatial model to identify likely locations of lead pipes in Flint, Michigan and prioritize digging efforts in the most urgent areas.</p>
         </div>
       </Link>
     </div>

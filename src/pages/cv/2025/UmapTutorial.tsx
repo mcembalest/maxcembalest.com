@@ -8,8 +8,6 @@ function UmapTutorial() {
 
       <h1>Visualizing Training Dynamics with UMAP</h1>
 
-      <img src="https://assets.nomicatlas.com/mnist-training-embeddings-umap-short.gif" alt="UMAP Tutorial" className="cv-thumbnail" />
-
       <section className="work-item">
         <p>
           Authored tutorial accepted to the official UMAP documentation on visualizing and analyzing the training
@@ -23,6 +21,7 @@ function UmapTutorial() {
             View the tutorial
           </a>
         </p>
+        <img src="https://assets.nomicatlas.com/mnist-training-embeddings-umap-short.gif" alt="UMAP Tutorial"/>
       </section>
     </div>
   )

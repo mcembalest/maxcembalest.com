@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 import '../../../pages/CV.css'
 
-function LlmEvaluationWebinars() {
+function LlmEvaluation() {
   return (
     <div className="work-container">
       <Link to="/cv">← Back to CV</Link>
 
-      <h1>LLM Evaluation Webinar Series</h1>
+      <h1>Applied Research on LLM Evaluation and LLM-as-Judge</h1>
 
       <section className="work-item">
         <p>
@@ -15,12 +15,14 @@ function LlmEvaluationWebinars() {
           LLM performance.
         </p>
         <p>
-          <a href="https://www.youtube.com/watch?v=jW290vZThgw">Part 1</a> |
-          <a href="https://www.youtube.com/watch?v=Ij1_9n9p0y8"> Part 2</a>
+          <a href="https://www.youtube.com/watch?v=jW290vZThgw">Webinar hosted by Arthur AI</a>
+        </p>
+        <p>
+          <a href="https://www.youtube.com/watch?v=Ij1_9n9p0y8"> Presentation for the AI Infrastructure Alliance</a>
         </p>
       </section>
     </div>
   )
 }
 
-export default LlmEvaluationWebinars
+export default LlmEvaluation

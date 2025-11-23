@@ -6,7 +6,7 @@ function StyleOutweighsSubstance() {
     <div className="work-container">
       <Link to="/cv">← Back to CV</Link>
 
-      <h1>Style Outweighs Substance - ICLR 2025</h1>
+      <h1>[Published @ ICLR 2025] Style Outweighs Substance: Failure Modes of LLM Judges in Alignment Benchmarking</h1>
 
       <section className="work-item">
         <p>

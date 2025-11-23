@@ -61,7 +61,7 @@ function Home() {
           <div className="arthur-images">
               <img src="/arthur/LLM-eval-webinar-1.png" alt="Arthur LLM Evaluation Webinar" />
               <img src="/arthur/LLM-eval-webinar-2.png" alt="Arthur LLM Evaluation Webinar" />
-              <img src="/arthur/shapley-residuals-medium.png" alt="Arthur Shapley Residuals Article" />
+              <img src="/arthur/shapresid-eq.png" alt="Arthur Shapley Residuals Article" />
             </div>
             <div className="bio-text">
               <p>

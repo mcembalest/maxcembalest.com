@@ -10,7 +10,7 @@ function MastersCapstone() {
 
       <section className="work-item">
         <p>
-          For my capstone research class, I worked with the organization{' '}
+          For my capstone research class during my Masters in Data Science at Harvard's Institute for Applied Computational Science, I worked with the organization{' '}
           <a href="https://blueconduit.com/">BlueConduit</a> on a{' '}
           <a href="https://github.com/mcembalest/teamBlueConduit">
             project to improve their model's performance at identifying lead in underground pipes serving water to homes
