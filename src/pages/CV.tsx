@@ -5,6 +5,110 @@ function CV() {
     <div className="work-container">
       <h1>CV</h1>
 
+      <h2>2025</h2>
+
+      <section className="work-item">
+        <h3>Style Outweighs Substance - ICLR 2025</h3>
+        <p>
+          Published research at ICLR 2025 that critically analyzes the failure modes of using LLM-judges for AI
+          alignment benchmarking. Identified critical biases in LLM-judges for AI alignment, leading to the development
+          of SOS-BENCH to provide more reliable and concrete measurements. This work demonstrates that popular LLM-judge
+          preferences do not correlate with concrete metrics for safety, world knowledge, or instruction following.
+          Instead, it identifies powerful implicit biases where judges prioritize stylistic qualities over substance
+          (i.e., factuality and safety). To address this, we introduced SOS-BENCH, a large-scale, reproducible
+          meta-benchmark with ground truth, to provide a more reliable, concrete measure of model alignment.
+        </p>
+        <p>
+          <a href="https://arxiv.org/abs/2409.15268">Read the paper on arXiv</a>
+        </p>
+      </section>
+
+      <section className="work-item">
+        <h3>Open Data Science Conference Speaker - Nomic</h3>
+        <p>
+          Speaker at the Open Data Science Conference (May 2025) representing Nomic.
+        </p>
+        <p>
+          <a href="https://odsc.com/blog/speaker/max-cembalest/">View speaker profile</a>
+        </p>
+      </section>
+
+      <h2>2024</h2>
+
+      <section className="work-item">
+        <h3>Reckoning with the Disagreement Problem - ODSC Presentation</h3>
+        <p>
+          Presented "Reckoning with the Disagreement Problem: Post-Hoc Explanation Agreement as a Training Objective"
+          at the Open Data Science Conference. This talk covered the PEAR (Post-hoc Explanation Agreement Regularization)
+          method developed at Arthur for improving the interpretability and reliability of neural networks by regularizing
+          for explanation consensus directly during model training.
+        </p>
+        <p>
+          <a href="https://odsc.com/speakers/reckoning-with-the-disagreement-problem-post-hoc-explanation-agreement-as-a-training-objective/">
+            View session description
+          </a>
+        </p>
+      </section>
+
+      <section className="work-item">
+        <h3>The Ultimate Guide to LLM Experimentation and Development</h3>
+        <p>
+          Authored a comprehensive technical guide detailing the end-to-end lifecycle for LLM experimentation and
+          development. Analyzed the "open vs. closed" and "small vs. big" model ecosystem, including quantitative
+          analysis of GPT-4's performance against competitors. Curated best-in-class tools and techniques for
+          interfacing with models, benchmarking, prompt engineering, few-shot example selection, agentic tool use,
+          and structured LLM outputs.
+        </p>
+        <p>
+          <a href="https://www.arthur.ai/blog/the-ultimate-guide-to-llm-experimentation-and-development-in-2024">
+            Read the guide
+          </a> | <a href="https://www.youtube.com/watch?v=9PGuvs_z4Pk">Watch the webinar</a>
+        </p>
+      </section>
+
+      <section className="work-item">
+        <h3>LLM Evaluation Webinar Series</h3>
+        <p>
+          Produced and presented educational webinar series on how to evaluate large language models, covering
+          evaluation methodologies, benchmarking approaches, and practical implementation strategies for assessing
+          LLM performance.
+        </p>
+        <p>
+          <a href="https://www.youtube.com/watch?v=jW290vZThgw">Part 1</a> |
+          <a href="https://www.youtube.com/watch?v=Ij1_9n9p0y8"> Part 2</a>
+        </p>
+      </section>
+
+      <section className="work-item">
+        <h3>Visualizing Training Dynamics with UMAP</h3>
+        <p>
+          Authored tutorial accepted to the official UMAP documentation on visualizing and analyzing the training
+          dynamics of neural networks. The tutorial demonstrates training a convolutional neural network on MNIST,
+          extracting high-dimensional embeddings from test images at each epoch, and utilizing UMAP to project these
+          evolving embeddings into 2D space. Leveraged the Nomic Atlas platform to create a large-scale, interactive
+          web visualization for exploring how the model learned to separate digit classes over time.
+        </p>
+        <p>
+          <a href="https://umap-learn.readthedocs.io/en/latest/nomic_atlas_visualizing_mnist_training_dynamics.html#visualizing-mnist-training-dynamics-with-nomic-atlas">
+            View the tutorial
+          </a>
+        </p>
+      </section>
+
+      <section className="work-item">
+        <h3>Nomic API Platform Documentation</h3>
+        <p>
+          Owner of the Nomic API Platform Documentation (docs.nomic.ai), managing technical content for an audience
+          of ML engineers and data scientists. Translated complex product capabilities into a comprehensive library
+          of expert guides, authoring articles on retrieval, multi-vector embedding models, and visualization
+          techniques. This work enabled users to understand and build with Nomic's core embedding and visualization
+          technology.
+        </p>
+        <p>
+          <a href="https://docs.nomic.ai">docs.nomic.ai</a>
+        </p>
+      </section>
+
       <h2>2023</h2>
 
       <section className="work-item">
