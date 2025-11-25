@@ -71,7 +71,7 @@ function CVIndex() {
       <Link to="/cv/2023/pear" className="cv-row">
         <img src="arthur/pear-loss.png" alt="PEAR" className="cv-thumbnail" />
         <div className="cv-content">
-          <h3>[Published @ AAAI/ACM 2023] Reckoning with the Disagreement Problem: Post-Hoc Explanation Agreement as a Training Objective</h3>
+          <h3>[Published @ AIES 2023] Reckoning with the Disagreement Problem: Post-Hoc Explanation Agreement as a Training Objective</h3>
           <p>We formulated a new training objective to improve the consistency of neural network explanations. Presented at 2023 AAAI/ACM conference on AI, Ethics, and Society.</p>
         </div>
       </Link>
@@ -97,8 +97,8 @@ function CVIndex() {
       <Link to="/cv/2023/tensions" className="cv-row">
         <img src="arthur/tensions.png" alt="Tensions" className="cv-thumbnail" />
         <div className="cv-content">
-          <h3>[Published @ IEEE 2023] Tensions Between the Proxies of Human Values in AI</h3>
-          <p>Position paper on the tradeoffs between fairness, transparency, and privacy in AI. Presented at 2023 IEEE Conference on Secure and Trustworthy Machine Learning.</p>
+          <h3>[Published @ SaTML 2023] Tensions Between the Proxies of Human Values in AI</h3>
+          <p>Position paper on the tradeoffs between fairness, transparency, and privacy in AI. Presented at 2023 SaTML Conference on Secure and Trustworthy Machine Learning (IEEE).</p>
         </div>
       </Link>
 

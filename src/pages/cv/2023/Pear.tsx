@@ -6,11 +6,11 @@ function Pear() {
     <div className="work-container">
       <Link to="/cv">← Back to CV</Link>
 
-      <h1>[Published @ AAAI/ACM 2023] Reckoning with the Disagreement Problem: Explanation Consensus as a Training Objective</h1>
+      <h1>[Published @ AIES 2023] Reckoning with the Disagreement Problem: Explanation Consensus as a Training Objective</h1>
 
       <section className="work-item">
         <p>
-          We formulated a new training objective to improve the consistency of neural network explanations. Presented at 2023 AAAI/ACM conference on AI, Ethics, and Society.
+          We formulated a new training objective to improve the consistency of neural network explanations. 
         </p>
         <p>
           The "Disagreement Problem" in explainable machine learning refers to the 

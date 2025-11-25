@@ -14,7 +14,7 @@ function Home() {
             <img src="/personal/max_tokyo_full.jpg" alt="Max in Tokyo" className="profile-image" />
             <div className="bio-text">
               <p>
-                Hi, I'm Max. I'm an AI engineer &amp; researcher based in NYC with 3+ years of industry experience making AI more defensible and explainable. I've worked for <a href="https://www.nomic.ai/">Nomic AI</a> and <a href="https://www.arthur.ai/">Arthur AI</a>. I've had my research published at ICLR, AAAI/ACM, and IEEE.
+                Hi, I'm Max. I'm an AI engineer &amp; researcher based in NYC with 3+ years of industry experience making AI more defensible and explainable. I've worked for <a href="https://www.nomic.ai/">Nomic AI</a> and <a href="https://www.arthur.ai/">Arthur AI</a>. I've had my research published at venues such as ICLR and SaTML.
               </p>
 
               <p>
