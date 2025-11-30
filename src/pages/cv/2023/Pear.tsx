@@ -10,7 +10,7 @@ function Pear() {
 
       <section className="work-item">
         <p>
-          We formulated a new training objective to improve the consistency of neural network explanations. 
+          We formulated a new training objective to improve the consistency of neural network explanations.
         </p>
         <p>
           The "Disagreement Problem" in explainable machine learning refers to the 
