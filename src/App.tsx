@@ -16,6 +16,7 @@ import Tensions from './pages/cv/2022/Tensions'
 import ShapleyResiduals from './pages/cv/2022/ShapleyResiduals'
 import SkewTheScript from './pages/cv/2022/SkewTheScript'
 import MastersCapstone from './pages/cv/2021/MastersCapstone'
+import AutoDiff from './pages/cv/2020/AutoDiff'
 import './App.css'
 
 function ScrollToTop() {
@@ -57,6 +58,7 @@ function App() {
           <Route path="/cv/2022/shapley-residuals" element={<ShapleyResiduals />} />
           <Route path="/cv/2022/skew-the-script" element={<SkewTheScript />} />
           <Route path="/cv/2021/masters-capstone" element={<MastersCapstone />} />
+          <Route path="/cv/2020/autodiff" element={<AutoDiff />} />
         </Routes>
       </div>
     </Router>

@@ -127,6 +127,16 @@ function CVIndex() {
           <p>Developed geospatial model to identify likely locations of lead pipes in Flint, Michigan and prioritize digging efforts in the most urgent areas.</p>
         </div>
       </Link>
+
+      <h2>2020</h2>
+
+      <Link to="/cv/2020/autodiff" className="cv-row">
+        <img src="harvardsoftwaredev/edge-pushing.png" alt="AutoDiff" className="cv-thumbnail" />
+        <div className="cv-content">
+          <h3>Automatic Differentiation Engine</h3>
+          <p>Final project for Harvard CS107 Systems Development. A Python package for automatic differentiation with forward and reverse mode, plus second-order Hessian computation via Edge Pushing.</p>
+        </div>
+      </Link>
     </div>
   )
 }
