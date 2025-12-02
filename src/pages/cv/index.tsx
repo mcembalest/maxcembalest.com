@@ -118,6 +118,14 @@ function CVIndex() {
         </div>
       </Link>
 
+      <Link to="/cv/2022/synthvis" className="cv-row">
+        <img src="harvarddataviz/synthvis.gif" alt="SynthVis" className="cv-thumbnail" />
+        <div className="cv-content">
+          <h3>SynthVis: Polyphonic Synthesizer Visualizer</h3>
+          <p>Final project for Harvard CS171 Data Visualization. A playable synthesizer in Unity where each instrument is visualized as a 3D object deforming based on spectral analysis.</p>
+        </div>
+      </Link>
+
       <h2>2021</h2>
 
       <Link to="/cv/2021/masters-capstone" className="cv-row">

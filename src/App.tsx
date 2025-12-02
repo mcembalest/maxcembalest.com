@@ -15,6 +15,7 @@ import PytorchGnn from './pages/cv/2024/PytorchGnn'
 import Tensions from './pages/cv/2022/Tensions'
 import ShapleyResiduals from './pages/cv/2022/ShapleyResiduals'
 import SkewTheScript from './pages/cv/2022/SkewTheScript'
+import SynthVis from './pages/cv/2022/SynthVis'
 import MastersCapstone from './pages/cv/2021/MastersCapstone'
 import './App.css'
 
@@ -56,6 +57,7 @@ function App() {
           <Route path="/cv/2022/tensions" element={<Tensions />} />
           <Route path="/cv/2022/shapley-residuals" element={<ShapleyResiduals />} />
           <Route path="/cv/2022/skew-the-script" element={<SkewTheScript />} />
+          <Route path="/cv/2022/synthvis" element={<SynthVis />} />
           <Route path="/cv/2021/masters-capstone" element={<MastersCapstone />} />
         </Routes>
       </div>
