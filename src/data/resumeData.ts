@@ -67,7 +67,7 @@ export const experiences: Experience[] = [
       "Developed SDKs, technical guides, and documentation enabling tens of thousands of developers to use Nomic models",
       "Benchmarked embedding models and built APIs and Python clients for Nomic's product suite",
       "Created end-to-end workflows to productionize Nomic's models and tools into deployed applications",
-      "Contributed UMAP tutorial to official documentation demonstrating neural network training visualization"
+      "Contributed UMAP tutorial to official documentation demonstrating the use of Nomic dimensionality reduction forneural network training visualization"
     ],
     tags: ["embeddings", "retrieval", "documentation", "sdk", "python", "ml"]
   },
