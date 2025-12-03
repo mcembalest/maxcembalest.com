@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "resume": "vite --open /resume-tool.html"
   },
   "dependencies": {
     "react": "^18.2.0",
