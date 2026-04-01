@@ -14,7 +14,10 @@ function Home() {
             <img src="/personal/max_tokyo_full.jpg" alt="Max in Tokyo" className="profile-image" />
             <div className="bio-text">
               <p>
-                Hi, I'm Max. I'm an AI engineer &amp; researcher based in NYC with 3+ years of industry experience making AI more defensible and explainable. I've worked for <a href="https://www.nomic.ai/">Nomic AI</a> and <a href="https://www.arthur.ai/">Arthur AI</a>. I've had my research published at venues such as ICLR and SaTML.
+                Hi, I'm Max.
+              <p>
+                
+              </p>I've worked for <a href="https://www.exoduspoint.com/">ExodusPoint</a>, <a href="https://www.nomic.ai/">Nomic AI</a>, and <a href="https://www.arthur.ai/">Arthur AI</a>. I've had my research published at venues such as ICLR and SaTML.
               </p>
 
               <p>
@@ -22,10 +25,10 @@ function Home() {
               </p>
 
               <p>
-                Before studying and working in AI, I taught calculus and computer science at <a href="https://www.africanleadershipacademy.org/">African Leadership Academy</a>, a high school in Johannesburg, South Africa.
+                Before studying and working in AI, I taught calculus, statistics, and computer science at <a href="https://www.africanleadershipacademy.org/">African Leadership Academy</a>, a high school in Johannesburg, South Africa.
               </p>
 
-              <p>I graduated Phi Beta Kappa from Wesleyan University in 2018 with a BA in Mathematics and Computer Science.</p>
+              <p>I graduated Phi Beta Kappa from Wesleyan University with a BA in Mathematics and Computer Science in 2018.</p>
             </div>
           </div>
         </section>
