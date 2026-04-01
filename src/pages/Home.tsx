@@ -17,7 +17,7 @@ function Home() {
                 Hi, I'm Max.
               <p>
                 
-              </p>I've worked for <a href="https://www.exoduspoint.com/">ExodusPoint</a>, <a href="https://www.nomic.ai/">Nomic AI</a>, and <a href="https://www.arthur.ai/">Arthur AI</a>. I've had my research published at venues such as ICLR and SaTML.
+              </p>I've worked for <a href="https://www.exoduspoint.com/">ExodusPoint</a>, <a href="https://www.nomic.ai/">Nomic AI</a>, and <a href="https://www.arthur.ai/">Arthur AI</a>.
               </p>
 
               <p>
@@ -25,7 +25,7 @@ function Home() {
               </p>
 
               <p>
-                Before studying and working in AI, I taught calculus, statistics, and computer science at <a href="https://www.africanleadershipacademy.org/">African Leadership Academy</a>, a high school in Johannesburg, South Africa.
+                From 2018-2020, I taught calculus, statistics, and computer science at <a href="https://www.africanleadershipacademy.org/">African Leadership Academy</a>, a high school in Johannesburg, South Africa.
               </p>
 
               <p>I graduated Phi Beta Kappa from Wesleyan University with a BA in Mathematics and Computer Science in 2018.</p>
@@ -103,7 +103,7 @@ function Home() {
           <div className="bio-content">
             <img src="/personal/max keys.png" alt="Max playing music" className="profile-image" />
             <div className="bio-text">
-              <p>I currently live in Brooklyn, New York, where I play piano and synthesizer in the band <a href="https://www.instagram.com/tomorrowishband/">Tomorrowish</a>. I share my other musical musings on my <a href="https://soundcloud.com/cembalest">Soundcloud</a>.</p>
+              <p>I currently live in Brooklyn, New York, where I play piano and synthesizer in the band <a href="https://www.instagram.com/tomorrowishband/">Tomorrowish</a>. I share other music I make on <a href="https://soundcloud.com/cembalest">Soundcloud</a>.</p>
             </div>
           </div>
         </section>
