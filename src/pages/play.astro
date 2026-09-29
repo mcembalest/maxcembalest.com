@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro'
+import { things } from '../things/registry.ts'
+import TessellatePreview from '../things/tessellate/Preview.astro'
+
+// Thumbnails are optional; a thing without one gets a plain card.
+const previews: Record<string, typeof TessellatePreview> = { tessellate: TessellatePreview }
+---
+
+<Base title="Play" description="Games and interactive things by Max Cembalest.">
+  <h1>Play</h1>
+  <ul class="things">
+    {
+      things.map((t) => {
+        const Preview = previews[t.slug]
+        return (
+          <li>
+            <a href={`/${t.slug}`}>
+              <div class="thumb">{Preview && <Preview />}</div>
+              <strong>{t.title}</strong>
+              <span class="muted">{t.description}</span>
+            </a>
+          </li>
+        )
+      })
+    }
+  </ul>
+</Base>
+
+<style>
+  .things {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .things a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .things a:hover strong {
+    text-decoration: underline;
+  }
+
+  .thumb {
+    aspect-ratio: 1;
+    margin-bottom: 0.4rem;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--rule);
+  }
+
+  .thumb :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+</style>

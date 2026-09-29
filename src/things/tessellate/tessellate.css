@@ -1,0 +1,158 @@
+/* The board keeps the game's own palette in both site themes; the chrome around it follows the site. */
+.tessellate {
+  --red: #d63350;
+  --blue: #2f63a3;
+  max-width: 34rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .tessellate {
+    --red: #ff6b85;
+    --blue: #86b0ee;
+  }
+}
+
+:root[data-theme='dark'] .tessellate {
+  --red: #ff6b85;
+  --blue: #86b0ee;
+}
+
+.tessellate .red {
+  color: var(--red);
+  font-weight: 600;
+}
+
+.tessellate .blue {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.tessellate .status {
+  margin-bottom: 1rem;
+}
+
+.tessellate .score {
+  font-size: 1.2rem;
+}
+
+/* Column labels above, row labels to the left, board in the corner they share. */
+.tessellate .frame {
+  display: grid;
+  grid-template-columns: 1.25rem 1fr;
+  grid-template-rows: 1.5rem auto;
+}
+
+.tessellate .cols,
+.tessellate .rows {
+  display: grid;
+  color: var(--muted);
+  font-size: 0.8rem;
+  place-items: center;
+}
+
+.tessellate .cols {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.tessellate .rows {
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.tessellate .board canvas {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border-radius: 2px;
+  touch-action: none;
+}
+
+.tessellate .breakdown {
+  margin-top: 1rem;
+}
+
+.tessellate .formula {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2.25rem;
+}
+
+.tessellate .formula .name {
+  min-width: 2.75rem;
+}
+
+.tessellate .factor {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 2px 4px;
+  border-radius: 4px;
+  cursor: default;
+}
+
+.tessellate .factor:hover {
+  background: var(--rule);
+}
+
+.tessellate .factor canvas {
+  margin: 0;
+  border-radius: 0;
+}
+
+.tessellate .op {
+  color: var(--muted);
+}
+
+.tessellate .controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-top: 1rem;
+}
+
+.tessellate button,
+.tessellate select {
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+}
+
+.tessellate select {
+  padding: 0.3rem 0.4rem;
+  margin-left: 0.3rem;
+}
+
+.tessellate button:hover:not(:disabled) {
+  border-color: var(--muted);
+}
+
+.tessellate button:disabled,
+.tessellate select:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.tessellate dialog {
+  max-width: 34rem;
+  padding: 1.5rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+}
+
+.tessellate dialog::backdrop {
+  background: rgb(0 0 0 / 0.5);
+}
+
+.tessellate dialog h2 {
+  margin-top: 0;
+  border: 0;
+}

@@ -1,0 +1,190 @@
+:root {
+  --text: #1a1a1a;
+  --muted: #666;
+  --rule: #e4e4e4;
+  --link: #0b57d0;
+  --bg: #fff;
+  color-scheme: light;
+}
+
+/* Dark tokens apply for a dark system preference unless the toggle chose light, or when it chose dark. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --text: #e6e6e6;
+    --muted: #9a9a9a;
+    --rule: #2e2e2e;
+    --link: #8ab4f8;
+    --bg: #121212;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --text: #e6e6e6;
+  --muted: #9a9a9a;
+  --rule: #2e2e2e;
+  --link: #8ab4f8;
+  --bg: #121212;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 17px/1.65 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  margin: 0 auto;
+  padding: 0 1rem 4rem;
+}
+
+@media (min-width: 700px) {
+  .page {
+    width: 80%;
+    padding-inline: 0;
+  }
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  padding: 1.5rem 0 2.5rem;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+nav .links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1.25rem;
+}
+
+nav .links a {
+  color: var(--muted);
+}
+
+nav a:hover,
+nav a[aria-current='page'] {
+  color: var(--text);
+}
+
+.theme-toggle {
+  display: flex;
+  align-self: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-toggle[hidden],
+.theme-toggle[data-target='light'] .moon,
+.theme-toggle[data-target='dark'] .sun {
+  display: none;
+}
+
+nav .brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.logo {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+h1 {
+  font-size: 1.9rem;
+  line-height: 1.25;
+  margin: 0 0 1.5rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+  margin: 2.75rem 0 1rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+h3 {
+  font-size: 1rem;
+  margin: 1.75rem 0 0.5rem;
+}
+
+p,
+ul {
+  margin: 0 0 1rem;
+}
+
+ul {
+  padding-left: 1.25rem;
+}
+
+li {
+  margin-bottom: 0.35rem;
+}
+
+a {
+  color: var(--link);
+  text-underline-offset: 2px;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+}
+
+code {
+  font: 0.9em ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.photo {
+  width: 360px;
+}
+
+.photo.small {
+  width: 240px;
+}
+
+.muted {
+  color: var(--muted);
+}
+

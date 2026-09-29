@@ -1,0 +1,96 @@
+---
+import Logo from '../components/Logo.astro'
+import '../styles/global.css'
+
+interface Props {
+  title?: string
+  description?: string
+  // Nav item to mark as current when the URL alone doesn't say, e.g. '/play' for an applet page.
+  section?: string
+}
+
+const {
+  title,
+  description = 'Max Cembalest works as an engineer on the AI Labs team at ExodusPoint Capital Management.',
+  section,
+} = Astro.props
+const fullTitle = title ? `${title} · Max Cembalest` : 'Max Cembalest'
+const canonical = new URL(Astro.url.pathname, Astro.site)
+const path = Astro.url.pathname.replace(/\/$/, '') || '/'
+const current = (href: string) =>
+  href === section || (href === '/' ? path === '/' && !section : path.startsWith(href)) ? 'page' : undefined
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <script is:inline>
+      try {
+        const theme = localStorage.getItem('theme')
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <nav>
+        <a class="brand" href="/"><Logo />Max Cembalest</a>
+        <div class="links">
+          <a href="/" aria-current={current('/')}>Home</a>
+          <a href="/cv" aria-current={current('/cv')}>CV</a>
+          <a href="/play" aria-current={current('/play')}>Play</a>
+          <a href="https://x.com/maxcembalest">Twitter</a>
+          <a href="https://www.linkedin.com/in/max-cembalest/">LinkedIn</a>
+          <a href="https://cerebella.substack.com">Substack</a>
+          <a href="https://github.com/mcembalest">GitHub</a>
+          <button class="theme-toggle" type="button" hidden>
+            <svg class="sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+            </svg>
+            <svg class="moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
+      </nav>
+      <main>
+        <slot />
+      </main>
+    </div>
+    <script is:inline>
+      const toggle = document.querySelector('.theme-toggle')
+      const root = document.documentElement
+      const systemDark = matchMedia('(prefers-color-scheme: dark)')
+      const isDark = () => (root.dataset.theme ?? (systemDark.matches ? 'dark' : 'light')) === 'dark'
+      const label = () => {
+        // Show the icon for the mode a click switches to: sun while dark, moon while light.
+        toggle.dataset.target = isDark() ? 'light' : 'dark'
+        toggle.setAttribute('aria-label', `Switch to ${toggle.dataset.target} mode`)
+      }
+      toggle.addEventListener('click', () => {
+        const theme = isDark() ? 'light' : 'dark'
+        root.dataset.theme = theme
+        try {
+          localStorage.setItem('theme', theme)
+        } catch {}
+        label()
+      })
+      systemDark.addEventListener('change', label)
+      label()
+      toggle.hidden = false
+    </script>
+  </body>
+</html>

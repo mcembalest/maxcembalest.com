@@ -1,0 +1,118 @@
+---
+import { Image } from 'astro:assets'
+import Base from '../layouts/Base.astro'
+import tokyo from '../assets/personal/tokyo.jpg'
+import keys from '../assets/personal/keys.png'
+---
+
+<Base>
+  <h1>Max Cembalest</h1>
+
+  <Image
+    src={tokyo}
+    alt="Max in Tokyo"
+    class="photo"
+    width={720}
+    widths={[360, 720]}
+    sizes="(max-width: 400px) 100vw, 360px"
+    loading="eager"
+    fetchpriority="high"
+  />
+
+  <p>Hi, I'm Max.</p>
+
+  <p>
+    I work as an engineer on the AI Labs team at
+    <a href="https://www.exoduspoint.com/">ExodusPoint Capital Management</a>, working on evals,
+    memory, personalization, monitoring, and research.
+  </p>
+
+  <p>I received my MS in Data Science from Harvard University in 2022.</p>
+
+  <p>
+    From 2018–2020, I taught calculus, statistics, and computer science at
+    <a href="https://www.africanleadershipacademy.org/">African Leadership Academy</a>, a high school
+    in Johannesburg, South Africa.
+  </p>
+
+  <p>
+    I graduated Phi Beta Kappa from Wesleyan University with a BA in Mathematics and Computer
+    Science in 2018.
+  </p>
+
+  <h2>My Work @ Nomic AI</h2>
+
+  <h3>Making Embeddings Usable & Understandable for Developers</h3>
+
+  <p>
+    I worked at Nomic AI as a Developer Advocate for one year building AI systems that leverage
+    vector embeddings and dimensionality reduction for retrieval, clustering, and analysis.
+  </p>
+
+  <p>
+    The main challenge faced by Nomic AI was demonstrating the value of embeddings: they are the
+    core machine learning technology behind Nomic's retrieval, clustering, and data analysis
+    products. They can be a confusing topic for developers, so Nomic hired me to make these models
+    and their applications understood by a wider audience.
+  </p>
+
+  <p>
+    I worked on Nomic's entire suite of models and products—benchmarking the models, building the
+    APIs and Python clients, and presenting end-to-end workflows to productionize Nomic's models and
+    tools into deployed applications.
+  </p>
+
+  <p>
+    I was responsible for the SDKs, <a href="https://docs.nomic.ai">technical guides</a>, and videos
+    that enabled tens of thousands of developers to use Nomic models and products for retrieval,
+    clustering, and advanced data analysis.
+  </p>
+
+  <h2>My Work @ Arthur AI</h2>
+
+  <p>
+    I worked for two years as a researcher at Arthur, an AI security and observability company,
+    during the transition from classical ML to generative AI in enterprise deployments. I built
+    interpretability systems for scalable model auditing and developed security systems to detect
+    and mitigate LLM failure modes like prompt injections and hallucinations.
+  </p>
+
+  <h3>Monitoring, Evaluation, & Security for the LLM Era</h3>
+
+  <p>
+    Starting in 2023, my role at Arthur pivoted into researching the new and emerging problem space
+    of enterprise monitoring and security for applications using LLMs and other generative AI
+    models. My work involved testing and benchmarking different LLMs as well as Arthur-designed
+    systems for tracking prompt injections, hallucinations, and sensitive data leakage. This period
+    of research culminated in public talks on the tradeoffs of different evaluation methods when
+    measuring LLM performance. This research also led to a
+    <a href="/cv/2025/style-outweighs-substance">paper</a> measuring how effective LLMs are at
+    evaluating other LLMs when surface-level factors like large amounts of markdown formatting can
+    distract LLMs-as-evaluators from noticing low-quality written text.
+  </p>
+
+  <h3>Making ML Interpretability Work for Enterprises</h3>
+
+  <p>
+    My work at Arthur focused on making the entire cycle of deployment, monitoring, data collection,
+    performance interpretability, and model re-training more feasible for Arthur's customers. My
+    research explored the ways we could make the automated generation of explanations more faithful
+    to the underlying algorithmic processes the explanations were meant to represent (TL;DR:
+    unfortunately, methods of generating explanations like LIME and SHAP are wildly insufficient
+    despite being trusted across the industry). This period of research culminated in a
+    <a href="/cv/2023/pear">paper</a> exploring whether neural networks on tabular data could be made
+    more explainable by modifying the training objective appropriately, since tabular data is
+    otherwise best served by logistic regression, decision trees, and random forests (that is mostly
+    what the industry already does).
+  </p>
+
+  <h2>Personal</h2>
+
+  <p>
+    I currently live in Brooklyn, New York, where I play piano and synthesizer in the band
+    <a href="https://www.instagram.com/tomorrowishband/">Tomorrowish</a>. I share other music I make
+    on <a href="https://soundcloud.com/cembalest">SoundCloud</a>.
+  </p>
+
+  <Image src={keys} alt="Max playing music" class="photo small" width={480} widths={[240, 480]} sizes="240px" />
+</Base>

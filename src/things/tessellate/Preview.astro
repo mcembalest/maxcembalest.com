@@ -1,0 +1,32 @@
+---
+// A finished game drawn as SVG at build time, used as the thumbnail on the index.
+import { greedyMove } from './ai.ts'
+import { BLUE, CELLS, N, RED, isOver, newGame, play } from './engine.ts'
+
+// Deterministic self-play, so the thumbnail is the same on every build.
+let seed = 7
+const random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32)
+const game = newGame()
+while (!isOver(game)) play(game, greedyMove(game, random))
+
+const points = (i: number) => {
+  const [r, c] = [Math.floor(i / N), i % N]
+  const [x0, y0] = [(c >> 1) * 2, (r >> 1) * 2]
+  const [tl, tr, bl, br] = [`${x0},${y0}`, `${x0 + 2},${y0}`, `${x0},${y0 + 2}`, `${x0 + 2},${y0 + 2}`]
+  if (!(r & 1) && !(c & 1)) return `${tl} ${tr} ${bl}`
+  if (!(r & 1)) return `${tr} ${br} ${tl}`
+  if (!(c & 1)) return `${bl} ${tl} ${br}`
+  return `${br} ${bl} ${tr}`
+}
+const tiles = Array.from({ length: CELLS }, (_, i) => i).filter((i) => game.cells[i] === RED || game.cells[i] === BLUE)
+---
+
+<svg viewBox={`0 0 ${N} ${N}`} role="img" aria-label="A finished game of Tessellate">
+  <rect width={N} height={N} fill="#2b3a48"></rect>
+  {tiles.map((i) => <polygon points={points(i)} fill={game.cells[i] === RED ? '#e94560' : '#3f72af'} />)}
+  <path
+    d={Array.from({ length: N / 2 + 1 }, (_, k) => `M${k * 2} 0V${N}M0 ${k * 2}H${N}`).join('')}
+    stroke="#c9d2dc"
+    stroke-width="0.06"
+  ></path>
+</svg>
