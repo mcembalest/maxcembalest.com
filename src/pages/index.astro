@@ -1,86 +1,57 @@
 ---
 import { Image } from 'astro:assets'
 import Base from '../layouts/Base.astro'
-import GameCards from '../components/GameCards.astro'
-import { getNotes } from '../lib/notes.ts'
 import profile from '../assets/personal/profile.png'
 import keys from '../assets/personal/keys.png'
-
-const notes = await getNotes()
 ---
 
 <Base>
-  <h1>Max Cembalest</h1>
+  <h1 class="visually-hidden">Max Cembalest</h1>
 
-  <Image
-    src={profile}
-    alt="Max on a city street with a puppy riding in a backpack"
-    class="photo"
-    width={720}
-    widths={[360, 720]}
-    sizes="(max-width: 400px) 100vw, 360px"
-    loading="eager"
-    fetchpriority="high"
-  />
-
-  <p>Hi, I'm Max.</p>
-
-  <p>
-    I work as an engineer on the AI Labs team at
-    <a href="https://www.exoduspoint.com/">ExodusPoint Capital Management</a>, working on evals,
-    memory, personalization, monitoring, and research.
-  </p>
-
-  <p>I received my MS in Data Science from Harvard University in 2022.</p>
-
-  <p>
-    From 2018–2020, I taught calculus, statistics, and computer science at
-    <a href="https://www.africanleadershipacademy.org/">African Leadership Academy</a>, a high school
-    in Johannesburg, South Africa.
-  </p>
-
-  <p>
-    I graduated Phi Beta Kappa from Wesleyan University with a BA in Mathematics and Computer
-    Science in 2018.
-  </p>
-
-  <h2><a href="/cv">CV</a></h2>
-
-  <ul>
-    <li><a href="/cv#education">Education</a></li>
-    <li><a href="/cv#publications">Publications</a></li>
-    <li><a href="/cv#work-experience">Work Experience</a></li>
-    <li><a href="/cv#projects">Projects</a></li>
-  </ul>
-
-  <h2><a href="/notes">Notes</a></h2>
-
-  <ul>
-    {notes.map((note) => <li><a href={`/notes/${note.id}`}>{note.data.title}</a></li>)}
-  </ul>
-
-  <h2><a href="/games">Games</a></h2>
-
-  <GameCards />
-
-  <h2>Personal</h2>
-
-  <p>
-    I currently live in Brooklyn, New York, where I play piano and synthesizer in the band
-    <a href="https://www.instagram.com/tomorrowishband/">Tomorrowish</a>. I share other music I make
-    on <a href="https://soundcloud.com/cembalest">SoundCloud</a>.
-  </p>
-
-  <Image src={keys} alt="Max playing music" class="photo small" width={480} widths={[240, 480]} sizes="240px" />
+  <div class="photos">
+    <Image
+      src={profile}
+      alt="Max on a city street with a puppy riding in a backpack"
+      width={1000}
+      widths={[500, 1000]}
+      sizes="(max-width: 700px) 100vw, 40vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <Image
+      src={keys}
+      alt="Max playing keyboards on stage"
+      width={720}
+      widths={[360, 720]}
+      sizes="(max-width: 700px) 100vw, 30vw"
+    />
+  </div>
 </Base>
 
 <style>
-  h2 a {
-    color: inherit;
-    text-decoration: none;
+  .photos {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
-  h2 a:hover {
-    text-decoration: underline;
+  .photos :global(img) {
+    margin: 0;
+    border-radius: 6px;
+  }
+
+  @media (min-width: 700px) {
+    .photos {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    /* Same height side by side: the square photo and the portrait keyboard photo. */
+    .photos :global(img) {
+      height: min(70vh, 36rem);
+      width: auto;
+      max-width: 100%;
+      object-fit: cover;
+    }
   }
 </style>

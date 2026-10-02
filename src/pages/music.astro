@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro'
+---
+
+<Base title="Music" description="Music by Max Cembalest.">
+  <h1>Music</h1>
+
+  <div class="blocks">
+    <section>
+      <h2>Tomorrowish</h2>
+      <p>I currently live in Brooklyn, New York, where I play piano and synthesizer in the band Tomorrowish.</p>
+      <p><a href="https://www.instagram.com/tomorrowishband/">Instagram ↗</a></p>
+    </section>
+
+    <section>
+      <h2>SoundCloud</h2>
+      <p>I share other music I make on SoundCloud.</p>
+      <p><a href="https://soundcloud.com/cembalest">SoundCloud ↗</a></p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.5rem;
+  }
+
+  section {
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+  }
+
+  section h2 {
+    margin-top: 0;
+    border: 0;
+    padding: 0;
+  }
+
+  section p:last-child {
+    margin-bottom: 0;
+  }
+</style>
