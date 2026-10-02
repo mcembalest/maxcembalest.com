@@ -11,15 +11,4 @@ const projects = defineCollection({
   }),
 })
 
-// Short pieces at /notes/<file name>. Drafts are visible in `npm run dev` only.
-const notes = defineCollection({
-  loader: glob({ pattern: '*.md', base: './src/content/notes' }),
-  schema: z.object({
-    title: z.string(),
-    date: z.coerce.date().optional(),
-    description: z.string().optional(),
-    draft: z.boolean().default(false),
-  }),
-})
-
-export const collections = { projects, notes }
+export const collections = { projects }
