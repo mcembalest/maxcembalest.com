@@ -9,12 +9,15 @@ interface Props {
   description?: string
   // Nav item to mark as current when the URL alone doesn't say, e.g. '/games' for a game's page.
   section?: string
+  // Fill exactly the window height on desktop, so the page itself never scrolls.
+  fit?: boolean
 }
 
 const {
   title,
   description = 'Max Cembalest works as an engineer on the AI Labs team at ExodusPoint Capital Management.',
   section,
+  fit = false,
 } = Astro.props
 const fullTitle = title ? `${title} · Max Cembalest` : 'Max Cembalest'
 const canonical = new URL(Astro.url.pathname, Astro.site)
@@ -50,7 +53,7 @@ const current = (href: string) =>
     </script>
   </head>
   <body>
-    <div class="page">
+    <div class:list={['page', { fit }]}>
       <nav>
         <a class="brand" href="/"><Logo />Max Cembalest</a>
         <div class="links">

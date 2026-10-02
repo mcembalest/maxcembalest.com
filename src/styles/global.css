@@ -54,6 +54,25 @@ body {
   }
 }
 
+@media (min-width: 1000px) {
+  .page.fit {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 100dvh;
+    padding-bottom: 1.5rem;
+  }
+
+  .page.fit nav {
+    padding-bottom: 1.25rem;
+  }
+
+  .page.fit main {
+    flex: 1;
+    min-height: 0;
+  }
+}
+
 nav {
   display: flex;
   flex-wrap: wrap;
