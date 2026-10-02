@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro'
+import { getNotes } from '../../lib/notes.ts'
+
+const notes = await getNotes()
+---
+
+<Base title="Notes" description="Notes by Max Cembalest.">
+  <h1>Notes</h1>
+  <ul class="notes">
+    {
+      notes.map((note) => (
+        <li>
+          <a href={`/notes/${note.id}`}>{note.data.title}</a>
+          {note.data.date && <span class="muted"> · {note.data.date.getUTCFullYear()}</span>}
+          {note.data.draft && <span class="muted"> · draft</span>}
+        </li>
+      ))
+    }
+  </ul>
+</Base>
+
+<style>
+  .notes {
+    padding: 0;
+    list-style: none;
+  }
+</style>

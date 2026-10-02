@@ -15,13 +15,13 @@ const previous = at > 0 ? things[at - 1] : undefined
 const next = at < things.length - 1 ? things[at + 1] : undefined
 ---
 
-<Base title={current.title} description={current.description} section="/play">
-  <p class="trail muted"><a href="/play">Play</a> / {current.title}</p>
+<Base title={current.title} description={current.description} section="/games">
+  <p class="trail muted"><a href="/games">Games</a> / {current.title}</p>
   <h1>{current.title}</h1>
   <slot />
   {
     (previous || next) && (
-      <nav class="neighbors" aria-label="More things">
+      <nav class="neighbors" aria-label="More games">
         {previous ? <a href={`/${previous.slug}`}>← {previous.title}</a> : <span />}
         {next && <a href={`/${next.slug}`}>{next.title} →</a>}
       </nav>

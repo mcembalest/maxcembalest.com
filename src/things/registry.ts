@@ -17,7 +17,7 @@ export const things: Thing[] = [
 ]
 
 // Top-level paths that belong to the site itself, so no applet can claim them.
-export const reserved = ['cv', 'play', '404', 'index', 'favicon', 'media', '_astro']
+export const reserved = ['cv', 'notes', 'games', '404', 'index', 'favicon', 'media', '_astro']
 
 export const thing = (slug: string) => {
   const found = things.find((t) => t.slug === slug)

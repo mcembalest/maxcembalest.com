@@ -5,7 +5,7 @@ import '../styles/global.css'
 interface Props {
   title?: string
   description?: string
-  // Nav item to mark as current when the URL alone doesn't say, e.g. '/play' for an applet page.
+  // Nav item to mark as current when the URL alone doesn't say, e.g. '/games' for a game's page.
   section?: string
 }
 
@@ -50,7 +50,8 @@ const current = (href: string) =>
         <div class="links">
           <a href="/" aria-current={current('/')}>Home</a>
           <a href="/cv" aria-current={current('/cv')}>CV</a>
-          <a href="/play" aria-current={current('/play')}>Play</a>
+          <a href="/notes" aria-current={current('/notes')}>Notes</a>
+          <a href="/games" aria-current={current('/games')}>Games</a>
           <a href="https://x.com/maxcembalest">Twitter</a>
           <a href="https://www.linkedin.com/in/max-cembalest/">LinkedIn</a>
           <a href="https://cerebella.substack.com">Substack</a>
