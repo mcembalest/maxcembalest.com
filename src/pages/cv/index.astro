@@ -15,6 +15,36 @@ import tensions from '../../assets/cv/tensions.png'
 
 const me = 'Max Cembalest'
 
+const jobs = [
+  {
+    title: 'AI Labs Engineer',
+    company: 'ExodusPoint Capital Management',
+    dates: '2026–present',
+    summary: 'Building evals, memory, personalization, and monitoring for AI systems, alongside research.',
+  },
+  {
+    title: 'Developer Advocate',
+    company: 'Nomic AI',
+    dates: '2024–2025',
+    summary:
+      "Owned the docs and SDKs that tens of thousands of developers used to build with Nomic's embedding models, and benchmarked the models against frontier labs to demonstrate their performance and cost-effectiveness.",
+  },
+  {
+    title: 'Researcher',
+    company: 'Arthur AI',
+    dates: '2022–2024',
+    summary:
+      "Researched and built LLM evaluation and security systems, benchmarking LLMs to guide which models Arthur's product could rely on.",
+  },
+  {
+    title: 'Math & Computer Science Teacher',
+    company: 'African Leadership Academy',
+    dates: '2018–2020',
+    summary:
+      'Taught 11th & 12th grade math, statistics, and computer science. Worked with students as part of the House program to conduct games, competitions, and bonding events for students, faculty, and staff.',
+  },
+]
+
 const publications = [
   {
     title: 'Style Outweighs Substance: Failure Modes of LLM Judges in Alignment Benchmarking',
@@ -48,7 +78,7 @@ interface Row {
   video?: string
 }
 
-const work: { year: number; rows: Row[] }[] = [
+const projects: { year: number; rows: Row[] }[] = [
   {
     year: 2025,
     rows: [
@@ -181,26 +211,6 @@ const external = (href?: string) => !!href && /^https?:/.test(href)
 <Base title="CV" description="CV of Max Cembalest.">
   <h1>CV</h1>
 
-  <h2 id="experience">Experience</h2>
-
-  <h3>ExodusPoint Capital Management <span class="muted">· 2026–present</span></h3>
-  <p>Engineer on the AI Labs team, working on evals, memory, personalization, monitoring, and research.</p>
-
-  <h3>Nomic AI <span class="muted">· 2024–2025</span></h3>
-  <p>
-    Developer Advocate and owner of the technical guides, developer SDKs, and explanatory videos for the
-    <a href="https://docs.nomic.ai">Nomic AI Platform</a>.
-  </p>
-
-  <h3>Arthur AI <span class="muted">· 2022–2024</span></h3>
-  <p>
-    Researched and developed security systems to detect and mitigate LLM failure modes like prompt
-    injections and hallucinations.
-  </p>
-
-  <h3>African Leadership Academy <span class="muted">· 2018–2020</span></h3>
-  <p>Taught calculus, statistics, and computer science.</p>
-
   <h2 id="education">Education</h2>
 
   <p>
@@ -224,10 +234,23 @@ const external = (href?: string) => !!href && /^https?:/.test(href)
     ))
   }
 
-  <h2 id="work">Work</h2>
+  <h2 id="work-experience">Work Experience</h2>
 
   {
-    work.map(({ year, rows }) => (
+    jobs.map((job) => (
+      <div class="job">
+        <h3>
+          {job.title} · {job.company} <span class="muted">· {job.dates}</span>
+        </h3>
+        <p>{job.summary}</p>
+      </div>
+    ))
+  }
+
+  <h2 id="projects">Projects</h2>
+
+  {
+    projects.map(({ year, rows }) => (
       <section class="year">
         <h3>{year}</h3>
         {rows.map((row) => {
