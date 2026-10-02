@@ -3,7 +3,7 @@ import { Image } from 'astro:assets'
 import Base from '../layouts/Base.astro'
 import GameCards from '../components/GameCards.astro'
 import { getNotes } from '../lib/notes.ts'
-import tokyo from '../assets/personal/tokyo.jpg'
+import profile from '../assets/personal/profile.png'
 import keys from '../assets/personal/keys.png'
 
 const notes = await getNotes()
@@ -13,8 +13,8 @@ const notes = await getNotes()
   <h1>Max Cembalest</h1>
 
   <Image
-    src={tokyo}
-    alt="Max in Tokyo"
+    src={profile}
+    alt="Max on a city street with a puppy riding in a backpack"
     class="photo"
     width={720}
     widths={[360, 720]}

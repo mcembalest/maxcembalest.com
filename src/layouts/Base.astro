@@ -1,5 +1,7 @@
 ---
+import { getImage } from 'astro:assets'
 import Logo from '../components/Logo.astro'
+import profile from '../assets/personal/profile.png'
 import '../styles/global.css'
 
 interface Props {
@@ -16,6 +18,9 @@ const {
 } = Astro.props
 const fullTitle = title ? `${title} · Max Cembalest` : 'Max Cembalest'
 const canonical = new URL(Astro.url.pathname, Astro.site)
+// Link previews (og:image) show the profile photo.
+const preview = await getImage({ src: profile, width: 600, height: 600, format: 'jpg' })
+const previewUrl = new URL(preview.src, Astro.site)
 const path = Astro.url.pathname.replace(/\/$/, '') || '/'
 const current = (href: string) =>
   href === section || (href === '/' ? path === '/' && !section : path.startsWith(href)) ? 'page' : undefined
@@ -36,6 +41,7 @@ const current = (href: string) =>
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={previewUrl} />
     <script is:inline>
       try {
         const theme = localStorage.getItem('theme')
