@@ -1,5 +1,17 @@
 ---
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
 import Base from '../../layouts/Base.astro'
+import llmJudge from '../../assets/papers/llm-judge.png'
+import diffusion from '../../assets/capstone/diffusion.png'
+import edgePushing from '../../assets/cv/edge-pushing.png'
+import llmEvalWebinar from '../../assets/cv/LLM-eval-webinar-1.png'
+import llmStatsCodingEval from '../../assets/cv/llm-stats-coding-eval.png'
+import nomicDocs from '../../assets/cv/nomic-docs-guides.png'
+import odsc from '../../assets/cv/odsc.png'
+import pearLoss from '../../assets/cv/pear-loss.png'
+import shapleyResiduals from '../../assets/cv/shapresid-eq.png'
+import tensions from '../../assets/cv/tensions.png'
 
 const me = 'Max Cembalest'
 
@@ -26,32 +38,144 @@ const publications = [
   },
 ]
 
-const projects = [
+// Rows link to a detail page on this site, to the work itself elsewhere, or nowhere.
+// A row shows an image, or a short looping clip from public/media/thumbs/<video>.mp4.
+interface Row {
+  title: string
+  text: string
+  href?: string
+  image?: ImageMetadata
+  video?: string
+}
+
+const work: { year: number; rows: Row[] }[] = [
   {
-    year: 2022,
-    title: 'Interactive Web Applications for Skew The Script',
-    page: '/cv/2022/skew-the-script',
-    text: 'Developed interactive web apps to help make AP Statistics lessons more engaging and relevant to students, covering distributional sampling, hypothesis testing, and the Central Limit Theorem.',
+    year: 2025,
+    rows: [
+      {
+        title: '[Published @ ICLR 2025] Style Outweighs Substance: Failure Modes of LLM Judges in Alignment Benchmarking',
+        text: 'Published research analyzing LLM-judge failure modes for AI alignment. Developed SOS-BENCH benchmark to provide more reliable measurements of model behavior.',
+        href: '/cv/2025/style-outweighs-substance',
+        image: llmJudge,
+      },
+      {
+        title: 'Tutorial on Visualizing Neural Network Training Dynamics with UMAP',
+        text: 'Contributed a guide to the official UMAP documentation demonstrating neural network training visualization using Nomic Atlas.',
+        href: 'https://github.com/lmcinnes/umap/pull/1202',
+        video: 'umap-mnist',
+      },
+      {
+        title: 'Nomic AI Platform Documentation',
+        text: "Owner of the technical guides, developer SDKs, and explanatory videos for the Nomic AI Platform. I was responsible for explaining Nomic's embedding models and overall product capabilities into a comprehensive library.",
+        href: 'https://docs.nomic.ai',
+        image: nomicDocs,
+      },
+      {
+        title: 'Speaker @ ODSC East 2025',
+        text: "Delivered a talk at the Open Data Science Conference (May 2025) detailing Nomic's pre-training and post-training methods for embedding models.",
+        image: odsc,
+      },
+    ],
+  },
+  {
+    year: 2024,
+    rows: [
+      {
+        title: 'Applied Research on LLM Experimentation Ecosystem',
+        text: 'Conducted research on the end-to-end lifecycle for LLM experimentation and development, including model selection, prompting, tool use, inference acceleration, structured outputs, and more.',
+        href: 'https://www.arthur.ai/blog/the-ultimate-guide-to-llm-experimentation-and-development-in-2024',
+        image: llmStatsCodingEval,
+      },
+      {
+        title: 'Tutorial on Graph Neural Networks & PyTorch Geometric',
+        text: 'Code & walkthrough for training graph neural networks using PyTorch Geometric and visualizing learned embeddings during training.',
+        href: 'https://github.com/mcembalest/GNN',
+        video: 'gnn-trajectories',
+      },
+      {
+        title: 'Speaker @ ODSC East 2024',
+        text: 'Presented "The Ultimate Guide to LLM Experimentation and Development" at the Open Data Science Conference.',
+        image: odsc,
+      },
+    ],
+  },
+  {
+    year: 2023,
+    rows: [
+      {
+        title: '[Published @ AIES 2023] Reckoning with the Disagreement Problem: Explanation Consensus as a Training Objective',
+        text: 'We formulated a new training objective to improve the consistency of neural network explanations. Presented at the 2023 AAAI/ACM Conference on AI, Ethics, and Society.',
+        href: '/cv/2023/pear',
+        image: pearLoss,
+      },
+      {
+        title: 'Applied Research on LLM Evaluation and LLM-as-Judge',
+        text: 'Published experiments evaluating large language models, covering methodologies, benchmarking, and implementation strategies.',
+        href: 'https://www.arthur.ai/blog/llm-guided-evaluation-using-llms-to-evaluate-llms',
+        image: llmEvalWebinar,
+      },
+      {
+        title: 'Speaker @ ODSC East 2023',
+        text: 'Presented "Reckoning with the Disagreement Problem: Post-Hoc Explanation Agreement as a Training Objective" at the Open Data Science Conference.',
+        href: 'https://odsc.com/speakers/reckoning-with-the-disagreement-problem-post-hoc-explanation-agreement-as-a-training-objective/',
+        image: odsc,
+      },
+    ],
   },
   {
     year: 2022,
-    title: 'SynthVis: Polyphonic Synthesizer Visualizer',
-    page: '/cv/2022/synthvis',
-    text: 'Final project for Harvard CS171 Data Visualization. A playable synthesizer in Unity where each instrument is visualized as a 3D object deforming based on spectral analysis.',
+    rows: [
+      {
+        title: '[Published @ SaTML 2023] Tensions Between the Proxies of Human Values in AI',
+        text: 'Position paper on the tradeoffs between fairness, transparency, and privacy in AI. Presented at the 2023 SaTML Conference on Secure and Trustworthy Machine Learning (IEEE).',
+        href: 'https://arxiv.org/abs/2212.07508',
+        image: tensions,
+      },
+      {
+        title: 'Article on Shapley Values & Residuals',
+        text: 'Article explaining Shapley values and calculating their residuals to measure explainability limitations. Published on TowardsDataScience.',
+        href: 'https://towardsdatascience.com/shapley-residuals-measuring-the-limitations-of-shapley-values-for-explainability-d9cdc3582522',
+        image: shapleyResiduals,
+      },
+      {
+        title: 'Interactive Web Applications for Skew The Script',
+        text: 'Developed interactive web apps to help make AP Statistics lessons more engaging and relevant to students, covering distributional sampling, hypothesis testing, and the Central Limit Theorem.',
+        href: '/cv/2022/skew-the-script',
+        video: 'sts-gerrymandering',
+      },
+      {
+        title: 'SynthVis: Polyphonic Synthesizer Visualizer',
+        text: 'Final project for Harvard CS171 Data Visualization. A playable synthesizer in Unity where each instrument is visualized as a 3D object deforming based on spectral analysis.',
+        href: '/cv/2022/synthvis',
+        video: 'synthvis',
+      },
+    ],
   },
   {
     year: 2021,
-    title: "Master's Capstone: Geospatial Modeling for Lead Pipe Removal",
-    page: '/cv/2021/masters-capstone',
-    text: 'Developed a geospatial model to identify likely locations of lead pipes in Flint, Michigan and prioritize digging efforts in the most urgent areas.',
+    rows: [
+      {
+        title: "Master's Capstone: Geospatial Modeling for Lead Pipe Removal",
+        text: 'Developed a geospatial model to identify likely locations of lead pipes in Flint, Michigan and prioritize digging efforts in the most urgent areas.',
+        href: '/cv/2021/masters-capstone',
+        image: diffusion,
+      },
+    ],
   },
   {
     year: 2020,
-    title: 'Automatic Differentiation Engine',
-    page: '/cv/2020/autodiff',
-    text: 'Final project for Harvard CS107 Systems Development. A Python package for automatic differentiation with forward and reverse mode, plus second-order Hessian computation via Edge Pushing.',
+    rows: [
+      {
+        title: 'Automatic Differentiation Engine',
+        text: 'Final project for Harvard CS107 Systems Development. A Python package for automatic differentiation with forward and reverse mode, plus second-order Hessian computation via Edge Pushing.',
+        href: '/cv/2020/autodiff',
+        image: edgePushing,
+      },
+    ],
   },
 ]
+
+const external = (href?: string) => !!href && /^https?:/.test(href)
 ---
 
 <Base title="CV" description="CV of Max Cembalest.">
@@ -88,6 +212,14 @@ const projects = [
   <h3>African Leadership Academy <span class="muted">· 2018–2020</span></h3>
   <p>Taught calculus, statistics, and computer science.</p>
 
+  <h2 id="education">Education</h2>
+
+  <p>
+    <strong>Harvard University</strong>, MS in Data Science <span class="muted">· 2022</span><br />
+    <strong>Wesleyan University</strong>, BA in Mathematics and Computer Science, Phi Beta Kappa
+    <span class="muted">· 2018</span>
+  </p>
+
   <h2 id="publications">Publications</h2>
 
   {
@@ -103,51 +235,126 @@ const projects = [
     ))
   }
 
-  <h2 id="talks">Talks and writing</h2>
-
-  <ul>
-    <li>
-      <strong>ODSC East 2025.</strong> Delivered a talk at the Open Data Science Conference detailing
-      Nomic's pre-training and post-training methods for embedding models.
-    </li>
-    <li>
-      <strong>ODSC East 2024.</strong> Presented "The Ultimate Guide to LLM Experimentation and
-      Development" at the Open Data Science Conference, and authored a
-      <a href="https://www.arthur.ai/blog/the-ultimate-guide-to-llm-experimentation-and-development-in-2024">technical article</a>
-      detailing the end-to-end lifecycle for LLM experimentation and development
-      (<a href="https://www.youtube.com/watch?v=9PGuvs_z4Pk">webinar</a>).
-    </li>
-    <li>
-      <strong>ODSC East 2023.</strong> Presented
-      <a href="https://odsc.com/speakers/reckoning-with-the-disagreement-problem-post-hoc-explanation-agreement-as-a-training-objective/">"Reckoning with the Disagreement Problem"</a>
-      at the Open Data Science Conference.
-    </li>
-    <li>
-      <strong>2023.</strong> Presented work on LLM evaluation and LLM-as-judge for the
-      <a href="https://www.youtube.com/watch?v=Ij1_9n9p0y8">AI Infrastructure Alliance</a> and
-      <a href="https://www.youtube.com/watch?v=jW290vZThgw">Arthur AI webinars</a>, and published
-      our work in an
-      <a href="https://www.arthur.ai/blog/llm-guided-evaluation-using-llms-to-evaluate-llms">article for Arthur AI</a>.
-    </li>
-  </ul>
-
-  <h2 id="projects">Projects</h2>
+  <h2 id="work">Work</h2>
 
   {
-    projects.map((project) => (
-      <p>
-        <a href={project.page}>{project.title}</a> <span class="muted">({project.year})</span>
-        <br />
-        {project.text}
-      </p>
+    work.map(({ year, rows }) => (
+      <section class="year">
+        <h3>{year}</h3>
+        {rows.map((row) => {
+          const Tag = row.href ? 'a' : 'div'
+          return (
+            <Tag class="row" href={row.href}>
+              <div class="thumb">
+                {row.image && <Image src={row.image} alt="" width={500} />}
+                {row.video && (
+                  <video data-autoplay muted loop playsinline preload="none" poster={`/media/thumbs/${row.video}.jpg`}>
+                    <source src={`/media/thumbs/${row.video}.mp4`} type="video/mp4" />
+                  </video>
+                )}
+              </div>
+              <div>
+                <strong class="title">
+                  {row.title}
+                  {external(row.href) && <span class="muted"> ↗</span>}
+                </strong>
+                <p class="muted">{row.text}</p>
+              </div>
+            </Tag>
+          )
+        })}
+      </section>
     ))
   }
-
-  <h2 id="education">Education</h2>
-
-  <p>
-    <strong>Harvard University</strong>, MS in Data Science <span class="muted">· 2022</span><br />
-    <strong>Wesleyan University</strong>, BA in Mathematics and Computer Science, Phi Beta Kappa
-    <span class="muted">· 2018</span>
-  </p>
 </Base>
+
+<script>
+  // Play thumbnail clips only while they're on screen, and not at all for people who prefer less motion.
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const video = entry.target as HTMLVideoElement
+          if (entry.isIntersecting) video.play().catch(() => {})
+          else video.pause()
+        }
+      },
+      { threshold: 0.5 },
+    )
+    document.querySelectorAll('video[data-autoplay]').forEach((video) => observer.observe(video))
+  }
+</script>
+
+<style>
+  .year h3 {
+    margin: 2rem 0 0.75rem;
+    color: var(--muted);
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a.row {
+    transition:
+      border-color 0.15s,
+      transform 0.15s;
+  }
+
+  a.row:hover {
+    border-color: var(--link);
+    transform: translateY(-2px);
+  }
+
+  a.row:hover .title {
+    text-decoration: underline;
+  }
+
+  .thumb {
+    flex-shrink: 0;
+    aspect-ratio: 5 / 3;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--rule);
+  }
+
+  .thumb :global(img),
+  .thumb video {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+    object-fit: contain;
+  }
+
+  .title {
+    display: block;
+    line-height: 1.35;
+    margin-bottom: 0.35rem;
+  }
+
+  .row p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  @media (min-width: 700px) {
+    .row {
+      flex-direction: row;
+      gap: 1.5rem;
+      padding: 1.25rem;
+    }
+
+    .thumb {
+      width: 250px;
+    }
+  }
+</style>
