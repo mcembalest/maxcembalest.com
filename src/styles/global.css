@@ -1,30 +1,38 @@
+/*
+  A quiet Cobble Hill palette: linen paper, walnut text, light-oak rules, and ivy-green links,
+  with an evening-brownstone dark mode. --surface is for blocks that sit on the page.
+*/
 :root {
-  --text: #1a1a1a;
-  --muted: #666;
-  --rule: #e4e4e4;
-  --link: #0b57d0;
-  --bg: #fff;
+  --bg: #faf7f1;
+  --surface: #f3eee5;
+  --text: #2b2622;
+  --muted: #6f665d;
+  --rule: #e4dbce;
+  --link: #2f6547;
+  --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
   color-scheme: light;
 }
 
 /* Dark tokens apply for a dark system preference unless the toggle chose light, or when it chose dark. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --text: #e6e6e6;
-    --muted: #9a9a9a;
-    --rule: #2e2e2e;
-    --link: #8ab4f8;
-    --bg: #121212;
+    --bg: #1a1714;
+    --surface: #221e1a;
+    --text: #ebe5dc;
+    --muted: #a39889;
+    --rule: #36302a;
+    --link: #9cc7a6;
     color-scheme: dark;
   }
 }
 
 :root[data-theme='dark'] {
-  --text: #e6e6e6;
-  --muted: #9a9a9a;
-  --rule: #2e2e2e;
-  --link: #8ab4f8;
-  --bg: #121212;
+  --bg: #1a1714;
+  --surface: #221e1a;
+  --text: #ebe5dc;
+  --muted: #a39889;
+  --rule: #36302a;
+  --link: #9cc7a6;
   color-scheme: dark;
 }
 
@@ -144,6 +152,12 @@ nav .brand {
 .logo {
   width: 1.75rem;
   height: 1.75rem;
+}
+
+h1,
+h2,
+nav .brand {
+  font-family: var(--serif);
 }
 
 h1 {
