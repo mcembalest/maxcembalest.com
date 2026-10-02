@@ -9,7 +9,8 @@
   --muted: #6f665d;
   --rule: #e4dbce;
   --link: #2f6547;
-  --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  /* One typeface everywhere. */
+  --font: AppleGothic, Arial, sans-serif;
   color-scheme: light;
 }
 
@@ -42,11 +43,18 @@
   box-sizing: border-box;
 }
 
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font: 17px/1.65 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  font: 17px/1.65 var(--font);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -154,12 +162,6 @@ nav .brand {
   height: 1.75rem;
 }
 
-h1,
-h2,
-nav .brand {
-  font-family: var(--serif);
-}
-
 h1 {
   font-size: 1.9rem;
   line-height: 1.25;
@@ -206,7 +208,7 @@ video {
 }
 
 code {
-  font: 0.9em ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
 }
 
 .visually-hidden {

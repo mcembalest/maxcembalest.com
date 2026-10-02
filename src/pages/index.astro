@@ -9,24 +9,34 @@ import keys from '../assets/personal/keys.png'
   <h1 class="visually-hidden">Max Cembalest</h1>
 
   <div class="photos">
-    <Image
-      src={profile}
-      alt="Max on a city street with a puppy riding in a backpack"
-      width={1000}
-      widths={[500, 1000]}
-      sizes="(max-width: 700px) 100vw, 40vw"
-      loading="eager"
-      fetchpriority="high"
-    />
-    <Image
-      src={keys}
-      alt="Max playing keyboards on stage"
-      width={720}
-      widths={[360, 720]}
-      sizes="(max-width: 700px) 100vw, 30vw"
-    />
+    <div class="photo" data-garden>
+      <Image
+        src={profile}
+        alt="Max on a city street with a puppy riding in a backpack"
+        width={1000}
+        widths={[500, 1000]}
+        sizes="(max-width: 700px) 100vw, 40vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="photo" data-garden>
+      <Image
+        src={keys}
+        alt="Max playing keyboards on stage"
+        width={720}
+        widths={[360, 720]}
+        sizes="(max-width: 700px) 100vw, 30vw"
+      />
+    </div>
   </div>
 </Base>
+
+<script>
+  import { plantGardens } from '../home/garden.ts'
+
+  plantGardens(Array.from(document.querySelectorAll<HTMLElement>('[data-garden]')))
+</script>
 
 <style>
   .photos {
@@ -35,9 +45,27 @@ import keys from '../assets/personal/keys.png'
     gap: 1.5rem;
   }
 
+  .photo {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    line-height: 0;
+  }
+
   .photos :global(img) {
     margin: 0;
-    border-radius: 6px;
+    border-radius: 0;
+  }
+
+  /* The tree automaton draws over the photo, one crisp square per cell. */
+  .photo :global(canvas.garden) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+    pointer-events: none;
+    transition: opacity 1.5s;
   }
 
   @media (min-width: 700px) {

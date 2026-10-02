@@ -201,7 +201,7 @@ export function mount(root: HTMLElement) {
       }
       ctx.restore()
       const at = labelPosition(island, cell)
-      ctx.font = `${Math.round(cell * 0.32)}px system-ui, sans-serif`
+      ctx.font = `${Math.round(cell * 0.32)}px ${getComputedStyle(canvas).fontFamily}`
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
       ctx.lineWidth = 3
