@@ -30,7 +30,6 @@ import keys from '../assets/personal/keys.png'
       />
     </div>
   </div>
-  <p class="garden-hint">Hold to charge · release to strike · swipe to sever</p>
 </Base>
 
 <script>
@@ -58,13 +57,6 @@ import keys from '../assets/personal/keys.png'
     border-radius: 0;
   }
 
-  .garden-hint {
-    color: var(--muted);
-    font-size: 0.75rem;
-    margin: 0.65rem 0 0;
-    letter-spacing: 0.025em;
-  }
-
   .photo {
     cursor: crosshair;
     touch-action: pan-y;
@@ -73,7 +65,6 @@ import keys from '../assets/personal/keys.png'
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .garden-hint { display: none; }
     .photo { cursor: auto; }
   }
 
