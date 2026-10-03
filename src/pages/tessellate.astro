@@ -1,0 +1,75 @@
+---
+import Thing from '../layouts/Thing.astro'
+import '../things/tessellate/tessellate.css'
+---
+
+<Thing slug="tessellate">
+  <div class="tessellate" data-tessellate>
+    <div class="status">
+      <div class="score" data-score></div>
+      <div data-status></div>
+    </div>
+
+    <div class="frame">
+      <span></span>
+      <div class="cols" aria-hidden="true">{[0, 1, 2, 3, 4].map((c) => <span>{c}</span>)}</div>
+      <div class="rows" aria-hidden="true">{['A', 'B', 'C', 'D', 'E'].map((r) => <span>{r}</span>)}</div>
+      <div class="board"><canvas aria-label="Tessellate board"></canvas></div>
+    </div>
+
+    <div class="breakdown" data-breakdown></div>
+
+    <div class="controls">
+      <button type="button" data-action="new">New Game</button>
+      <button type="button" data-action="undo">Undo</button>
+      <button type="button" data-action="rules">Rules</button>
+    </div>
+    <div class="controls">
+      <label>
+        Opponent
+        <select data-opponent>
+          <option value="friend">Friend (same screen)</option>
+          <option value="greedy">Computer: greedy</option>
+          <option value="alphabeta" selected>Computer: alpha-beta</option>
+        </select>
+      </label>
+      <label>
+        Computer plays
+        <select data-computer-side>
+          <option value="blue" selected>Blue</option>
+          <option value="red">Red</option>
+        </select>
+      </label>
+      <label><input type="checkbox" data-islands checked /> Show Islands (I)</label>
+    </div>
+
+    <dialog>
+      <h2>Rules of Tessellate</h2>
+      <p>1. A <strong>turn</strong> consists of a player placing a tile with their color on the board.</p>
+      <p>2. A <strong>tile</strong> is a right triangle that fills one half of a square on the board.</p>
+      <p>
+        3. A <strong>valid tile placement</strong> does not overlap with any tiles on the board. Thus if a square
+        is empty, there are four ways to place a tile in it. But if a square already has one tile in it, there is
+        only one valid way to fill it. In other words, choosing a corner of a square to place your tile in
+        prevents you and your opponent from using the two adjacent corners in that square.
+      </p>
+      <p>4. An <strong>island</strong> is formed by any number of tiles of the same color connected by a full edge.</p>
+      <p>5. The <strong>size of an island</strong> is the number of tiles in it.</p>
+      <p>
+        6. A <strong>player's score</strong> is the product of all their islands (the multiplication of their
+        islands' sizes).
+      </p>
+      <p>7. The <strong>end of the game</strong> is when all the squares are filled and no more tiles can be placed.</p>
+      <p>8. The <strong>winner</strong> is the player with the highest score at the end of the game.</p>
+      <form method="dialog"><button data-action="close">Close</button></form>
+    </dialog>
+  </div>
+
+  <p class="muted"><a href="https://github.com/mcembalest/tessellate">Source on GitHub</a></p>
+</Thing>
+
+<script>
+  import { mount } from '../things/tessellate/ui.ts'
+
+  mount(document.querySelector<HTMLElement>('[data-tessellate]')!)
+</script>

@@ -1,0 +1,47 @@
+---
+// Page frame for an applet: site nav, a trail back to the index, the applet, and links to the
+// neighboring applets so people can keep playing without going back.
+import Base from './Base.astro'
+import { thing, things } from '../things/registry.ts'
+
+interface Props {
+  slug: string
+}
+
+const { slug } = Astro.props
+const current = thing(slug)
+const at = things.indexOf(current)
+const previous = at > 0 ? things[at - 1] : undefined
+const next = at < things.length - 1 ? things[at + 1] : undefined
+---
+
+<Base title={current.title} description={current.description} section="/games">
+  <p class="trail muted"><a href="/games">Games</a> / {current.title}</p>
+  <h1>{current.title}</h1>
+  <slot />
+  {
+    (previous || next) && (
+      <nav class="neighbors" aria-label="More games">
+        {previous ? <a href={`/${previous.slug}`}>← {previous.title}</a> : <span />}
+        {next && <a href={`/${next.slug}`}>{next.title} →</a>}
+      </nav>
+    )
+  }
+</Base>
+
+<style>
+  .trail {
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+  }
+
+  .trail a {
+    color: inherit;
+  }
+
+  .neighbors {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+  }
+</style>

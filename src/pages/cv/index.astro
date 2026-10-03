@@ -1,0 +1,576 @@
+---
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import Base from '../../layouts/Base.astro'
+import llmJudge from '../../assets/papers/llm-judge.png'
+import diffusion from '../../assets/capstone/diffusion.png'
+import edgePushing from '../../assets/cv/edge-pushing.png'
+import llmEvalWebinar from '../../assets/cv/LLM-eval-webinar-1.png'
+import llmStatsCodingEval from '../../assets/cv/llm-stats-coding-eval.png'
+import nomicDocs from '../../assets/cv/nomic-docs-guides.png'
+import odsc from '../../assets/cv/odsc.png'
+import pearLoss from '../../assets/cv/pear-loss.png'
+import shapleyResiduals from '../../assets/cv/shapresid-eq.png'
+import tensions from '../../assets/cv/tensions.png'
+
+const me = 'Max Cembalest'
+
+const jobs = [
+  {
+    title: 'AI Labs Engineer',
+    company: 'ExodusPoint Capital Management',
+    dates: '2026–present',
+    summary: 'Building evals, memory, personalization, monitoring, and self-improvement loops for AI systems, alongside research.',
+  },
+  {
+    title: 'Developer Advocate',
+    company: 'Nomic AI',
+    dates: '2024–2025',
+    summary:
+      "Owned the docs and SDKs that tens of thousands of developers used to build with Nomic's embedding models, and benchmarked the models against frontier labs to demonstrate their performance and cost-effectiveness.",
+  },
+  {
+    title: 'Researcher',
+    company: 'Arthur AI',
+    dates: '2022–2024',
+    summary:
+      "Researched and built LLM evaluation and security systems, benchmarking LLMs to guide which models Arthur's product could rely on.",
+  },
+  {
+    title: 'Math & Computer Science Teacher',
+    company: 'African Leadership Academy',
+    dates: '2018–2020',
+    summary:
+      'Taught 11th & 12th grade math, statistics, and computer science. Worked with students as part of the House program to conduct games, competitions, and bonding events for students, faculty, and staff.',
+  },
+]
+
+const publications = [
+  {
+    title: 'Style Outweighs Substance: Failure Modes of LLM Judges in Alignment Benchmarking',
+    authors: ['Benjamin Feuer', 'Micah Goldblum', 'Teresa Datta', 'Sanjana Nambiar', 'Raz Besaleli', 'Samuel Dooley', me, 'John P. Dickerson'],
+    venue: 'ICLR 2025',
+    page: '/cv/2025/style-outweighs-substance',
+    paper: 'https://arxiv.org/abs/2409.15268',
+  },
+  {
+    title: 'Reckoning with the Disagreement Problem: Explanation Consensus as a Training Objective',
+    authors: ['Avi Schwarzschild', me, 'Karthik Rao', 'Keegan Hines', 'John Dickerson'],
+    venue: 'AIES 2023',
+    page: '/cv/2023/pear',
+    paper: 'https://arxiv.org/abs/2303.13299',
+  },
+  {
+    title: 'Tensions Between the Proxies of Human Values in AI',
+    authors: ['Teresa Datta', 'Daniel Nissani', me, 'Akash Khanna', 'Haley Massa', 'John P. Dickerson'],
+    venue: 'SaTML 2023',
+    paper: 'https://arxiv.org/abs/2212.07508',
+  },
+]
+
+// Rows link to a detail page on this site, to the work itself elsewhere, or nowhere.
+// A row shows an image, or a short looping clip from public/media/thumbs/<video>.mp4.
+interface Row {
+  title: string
+  text: string
+  href?: string
+  image?: ImageMetadata
+  video?: string
+}
+
+const projects: { year: number; rows: Row[] }[] = [
+  {
+    year: 2025,
+    rows: [
+      {
+        title: '[Published @ ICLR 2025] Style Outweighs Substance: Failure Modes of LLM Judges in Alignment Benchmarking',
+        text: 'Published research analyzing LLM-judge failure modes for AI alignment. Developed SOS-BENCH benchmark to provide more reliable measurements of model behavior.',
+        href: '/cv/2025/style-outweighs-substance',
+        image: llmJudge,
+      },
+      {
+        title: 'Tutorial on Visualizing Neural Network Training Dynamics with UMAP',
+        text: 'Contributed a guide to the official UMAP documentation demonstrating neural network training visualization using Nomic Atlas.',
+        href: 'https://github.com/lmcinnes/umap/pull/1202',
+        video: 'umap-mnist',
+      },
+      {
+        title: 'Nomic AI Platform Documentation',
+        text: "Owner of the technical guides, developer SDKs, and explanatory videos for the Nomic AI Platform. I was responsible for explaining Nomic's embedding models and overall product capabilities into a comprehensive library.",
+        href: 'https://docs.nomic.ai',
+        image: nomicDocs,
+      },
+      {
+        title: 'Speaker @ ODSC East 2025',
+        text: "Delivered a talk at the Open Data Science Conference (May 2025) detailing Nomic's pre-training and post-training methods for embedding models.",
+        image: odsc,
+      },
+    ],
+  },
+  {
+    year: 2024,
+    rows: [
+      {
+        title: 'Applied Research on LLM Experimentation Ecosystem',
+        text: 'Conducted research on the end-to-end lifecycle for LLM experimentation and development, including model selection, prompting, tool use, inference acceleration, structured outputs, and more.',
+        href: 'https://www.arthur.ai/blog/the-ultimate-guide-to-llm-experimentation-and-development-in-2024',
+        image: llmStatsCodingEval,
+      },
+      {
+        title: 'Tutorial on Graph Neural Networks & PyTorch Geometric',
+        text: 'Code & walkthrough for training graph neural networks using PyTorch Geometric and visualizing learned embeddings during training.',
+        href: 'https://github.com/mcembalest/GNN',
+        video: 'gnn-trajectories',
+      },
+      {
+        title: 'Speaker @ ODSC East 2024',
+        text: 'Presented "The Ultimate Guide to LLM Experimentation and Development" at the Open Data Science Conference.',
+        image: odsc,
+      },
+    ],
+  },
+  {
+    year: 2023,
+    rows: [
+      {
+        title: '[Published @ AIES 2023] Reckoning with the Disagreement Problem: Explanation Consensus as a Training Objective',
+        text: 'We formulated a new training objective to improve the consistency of neural network explanations. Presented at the 2023 AAAI/ACM Conference on AI, Ethics, and Society.',
+        href: '/cv/2023/pear',
+        image: pearLoss,
+      },
+      {
+        title: 'Applied Research on LLM Evaluation and LLM-as-Judge',
+        text: 'Published experiments evaluating large language models, covering methodologies, benchmarking, and implementation strategies.',
+        href: 'https://www.arthur.ai/blog/llm-guided-evaluation-using-llms-to-evaluate-llms',
+        image: llmEvalWebinar,
+      },
+      {
+        title: 'Speaker @ ODSC East 2023',
+        text: 'Presented "Reckoning with the Disagreement Problem: Post-Hoc Explanation Agreement as a Training Objective" at the Open Data Science Conference.',
+        href: 'https://odsc.com/speakers/reckoning-with-the-disagreement-problem-post-hoc-explanation-agreement-as-a-training-objective/',
+        image: odsc,
+      },
+    ],
+  },
+  {
+    year: 2022,
+    rows: [
+      {
+        title: '[Published @ SaTML 2023] Tensions Between the Proxies of Human Values in AI',
+        text: 'Position paper on the tradeoffs between fairness, transparency, and privacy in AI. Presented at the 2023 SaTML Conference on Secure and Trustworthy Machine Learning (IEEE).',
+        href: 'https://arxiv.org/abs/2212.07508',
+        image: tensions,
+      },
+      {
+        title: 'Article on Shapley Values & Residuals',
+        text: 'Article explaining Shapley values and calculating their residuals to measure explainability limitations. Published on TowardsDataScience.',
+        href: 'https://towardsdatascience.com/shapley-residuals-measuring-the-limitations-of-shapley-values-for-explainability-d9cdc3582522',
+        image: shapleyResiduals,
+      },
+      {
+        title: 'Interactive Web Applications for Skew The Script',
+        text: 'Developed interactive web apps to help make AP Statistics lessons more engaging and relevant to students, covering distributional sampling, hypothesis testing, and the Central Limit Theorem.',
+        href: '/cv/2022/skew-the-script',
+        video: 'sts-gerrymandering',
+      },
+      {
+        title: 'SynthVis: Polyphonic Synthesizer Visualizer',
+        text: 'Final project for Harvard CS171 Data Visualization. A playable synthesizer in Unity where each instrument is visualized as a 3D object deforming based on spectral analysis.',
+        href: '/cv/2022/synthvis',
+        video: 'synthvis',
+      },
+    ],
+  },
+  {
+    year: 2021,
+    rows: [
+      {
+        title: "Master's Capstone: Geospatial Modeling for Lead Pipe Removal",
+        text: 'Developed a geospatial model to identify likely locations of lead pipes in Flint, Michigan and prioritize digging efforts in the most urgent areas.',
+        href: '/cv/2021/masters-capstone',
+        image: diffusion,
+      },
+    ],
+  },
+  {
+    year: 2020,
+    rows: [
+      {
+        title: 'Automatic Differentiation Engine',
+        text: 'Final project for Harvard CS107 Systems Development. A Python package for automatic differentiation with forward and reverse mode, plus second-order Hessian computation via Edge Pushing.',
+        href: '/cv/2020/autodiff',
+        image: edgePushing,
+      },
+    ],
+  },
+]
+
+const external = (href?: string) => !!href && /^https?:/.test(href)
+const lastName = (name: string) => name.split(' ').at(-1)
+---
+
+<Base title="CV" description="CV of Max Cembalest." fit>
+  <h1 class="visually-hidden">CV</h1>
+
+  <div class="cv">
+    <div class="column summary">
+      <section class="block">
+        <h2 id="education">Education</h2>
+
+        <p>
+          <strong>Harvard University</strong>, MS in Data Science <span class="muted">· 2022</span><br />
+          <strong>Wesleyan University</strong>, BA in Mathematics and Computer Science, Phi Beta Kappa
+          <span class="muted">· 2018</span>
+        </p>
+      </section>
+
+      <section class="block">
+        <h2 id="publications">Publications</h2>
+
+        {
+          publications.map((pub) => (
+            <p class="publication">
+              {pub.page ? <a href={pub.page}>{pub.title}</a> : pub.title}
+              <br />
+              <span class="muted">
+                {/* Kept on one line: line breaks here would render as spaces before the commas. */}
+                {pub.authors.map((author, i) => <>{i > 0 && ', '}{author === me ? <strong>{lastName(author)}</strong> : lastName(author)}</>)}. <em>{pub.venue}</em>. <a href={pub.paper}>arXiv</a>
+              </span>
+            </p>
+          ))
+        }
+      </section>
+
+      <section class="block">
+        <h2 id="work-experience">Work Experience</h2>
+
+        {
+          jobs.map((job) => (
+            <div class="job">
+              <h3>
+                {job.title} · {job.company} <span class="muted">· {job.dates}</span>
+              </h3>
+              <p>{job.summary}</p>
+            </div>
+          ))
+        }
+      </section>
+    </div>
+
+    <div class="column">
+      <h2 id="projects" class="visually-hidden">Projects</h2>
+
+      {
+        projects.map(({ year, rows }) => (
+          <section class="year">
+            <h3>{year}</h3>
+            {rows.map((row) => {
+              const Tag = row.href ? 'a' : 'div'
+              return (
+                <Tag class="row" href={row.href}>
+                  <div class="thumb">
+                    {row.image && <Image src={row.image} alt="" width={500} />}
+                    {row.video && (
+                      <video data-autoplay muted loop playsinline preload="none" poster={`/media/thumbs/${row.video}.jpg`}>
+                        <source src={`/media/thumbs/${row.video}.mp4`} type="video/mp4" />
+                      </video>
+                    )}
+                  </div>
+                  <div>
+                    <strong class="title">
+                      {row.title}
+                      {external(row.href) && <span class="muted"> ↗</span>}
+                    </strong>
+                    <p class="muted">{row.text}</p>
+                  </div>
+                </Tag>
+              )
+            })}
+          </section>
+        ))
+      }
+    </div>
+  </div>
+
+  <dialog class="project" aria-label="Project">
+    <div class="bar">
+      <a data-full-page href="">Open as page</a>
+      <button type="button" data-close aria-label="Close">✕</button>
+    </div>
+    <article data-content></article>
+  </dialog>
+</Base>
+
+<script>
+  // Play thumbnail clips only while they're on screen, and not at all for people who prefer less motion.
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const video = entry.target as HTMLVideoElement
+          if (entry.isIntersecting) video.play().catch(() => {})
+          else video.pause()
+        }
+      },
+      { threshold: 0.5 },
+    )
+    document.querySelectorAll('video[data-autoplay]').forEach((video) => observer.observe(video))
+  }
+
+  // Project pages open in a modal. The URL changes to the project's own address, so the link
+  // can be shared, a reload shows the full page, and Back closes the modal.
+  const dialog = document.querySelector<HTMLDialogElement>('dialog.project')!
+  const content = dialog.querySelector<HTMLElement>('[data-content]')!
+  const fullPage = dialog.querySelector<HTMLAnchorElement>('[data-full-page]')!
+  const cvUrl = location.pathname
+  const cvTitle = document.title
+  const cache = new Map<string, Promise<Document>>()
+
+  const load = (path: string) => {
+    if (!cache.has(path)) {
+      cache.set(
+        path,
+        fetch(path)
+          .then((r) => r.text())
+          .then((html) => new DOMParser().parseFromString(html, 'text/html')),
+      )
+    }
+    return cache.get(path)!
+  }
+
+  async function show(path: string) {
+    const page = await load(path)
+    const main = page.querySelector('main')!
+    // The page's own "← CV" link is redundant inside the modal.
+    main.querySelector('a[href="/cv"]')?.closest('p')?.remove()
+    content.replaceChildren(...Array.from(main.cloneNode(true).childNodes))
+    fullPage.href = path
+    document.title = page.title
+    if (!dialog.open) dialog.showModal()
+    dialog.scrollTop = 0
+  }
+
+  const isProjectLink = (a: HTMLAnchorElement) => a.origin === location.origin && /^\/cv\/\d{4}\//.test(a.pathname)
+
+  document.addEventListener('click', (e) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+    const a = (e.target as Element).closest('a')
+    if (!a || dialog.contains(a) || !isProjectLink(a)) return
+    e.preventDefault()
+    history.pushState({ project: a.pathname }, '', a.pathname)
+    show(a.pathname).catch(() => (location.href = a.pathname))
+  })
+
+  // Prefetch on hover so the modal opens instantly.
+  document.addEventListener('pointerover', (e) => {
+    const a = (e.target as Element).closest?.('a')
+    if (a && isProjectLink(a)) load(a.pathname)
+  })
+
+  // Closing by Esc, the ✕ button, or the backdrop goes back to the CV's address.
+  dialog.addEventListener('close', () => {
+    document.title = cvTitle
+    if (history.state?.project) history.back()
+  })
+  dialog.querySelector('[data-close]')!.addEventListener('click', () => dialog.close())
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close()
+  })
+  window.addEventListener('popstate', () => {
+    const project = history.state?.project
+    if (project) show(project)
+    else if (dialog.open && location.pathname === cvUrl) {
+      document.title = cvTitle
+      dialog.close()
+    }
+  })
+</script>
+
+<style>
+  /* Sections are blocks on the page; their headings are small labels. */
+  .block {
+    padding: 0.8rem 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+  }
+
+  .block + .block {
+    margin-top: 0.75rem;
+  }
+
+  h2 {
+    margin: 0 0 0.4rem;
+    padding: 0;
+    border: 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .summary {
+    font-size: 0.86rem;
+    line-height: 1.45;
+  }
+
+  .summary p {
+    margin-bottom: 0.45rem;
+  }
+
+  .summary .block > :last-child,
+  .summary .block > :last-child p {
+    margin-bottom: 0;
+  }
+
+  .job + .job {
+    margin-top: 0.55rem;
+  }
+
+  .job h3 {
+    margin: 0 0 0.1rem;
+    font-size: 0.88rem;
+  }
+
+  .job p {
+    margin-bottom: 0;
+  }
+
+  /* Year labels stay pinned at the top of the projects column while their rows scroll by. */
+  .year h3 {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    margin: 0;
+    padding: 0.25rem 0 0.5rem;
+    background: var(--bg);
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  .year + .year {
+    margin-top: 0.75rem;
+  }
+
+  .row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 0.75rem;
+    margin-bottom: 0.6rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a.row {
+    transition:
+      border-color 0.15s,
+      transform 0.15s;
+  }
+
+  a.row:hover {
+    border-color: var(--link);
+    transform: translateY(-1px);
+  }
+
+  a.row:hover .title {
+    text-decoration: underline;
+  }
+
+  .thumb {
+    flex-shrink: 0;
+    width: 120px;
+    aspect-ratio: 5 / 3;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--bg);
+  }
+
+  .thumb :global(img),
+  .thumb video {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+    object-fit: contain;
+  }
+
+  .title {
+    display: block;
+    font-size: 0.92rem;
+    line-height: 1.35;
+    margin-bottom: 0.2rem;
+  }
+
+  .row p {
+    margin: 0;
+    font-size: 0.84rem;
+    line-height: 1.45;
+  }
+
+  /* Desktop: two columns that exactly fill the space under the nav; each scrolls on its own if needed. */
+  @media (min-width: 1000px) {
+    .cv {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 2rem;
+      height: 100%;
+    }
+
+    .column {
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+      scrollbar-width: thin;
+    }
+  }
+
+  @media (max-width: 999px) {
+    .column + .column {
+      margin-top: 1.5rem;
+    }
+  }
+
+  .project {
+    width: min(52rem, calc(100vw - 2rem));
+    max-height: calc(100dvh - 3rem);
+    padding: 0 1.75rem 1.75rem;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+  }
+
+  .project::backdrop {
+    background: rgb(30 22 16 / 0.55);
+  }
+
+  .bar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0 0.5rem;
+    background: var(--bg);
+    font-size: 0.9rem;
+  }
+
+  .bar button {
+    font: inherit;
+    font-size: 1.1rem;
+    color: var(--muted);
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .bar button:hover {
+    color: var(--text);
+  }
+
+  .project :global(h1) {
+    font-size: 1.5rem;
+  }
+</style>

@@ -1,0 +1,94 @@
+---
+import { Image } from 'astro:assets'
+import Base from '../layouts/Base.astro'
+import profile from '../assets/personal/profile.png'
+import keys from '../assets/personal/keys.png'
+---
+
+<Base>
+  <h1 class="visually-hidden">Max Cembalest</h1>
+
+  <div class="photos">
+    <div class="photo" data-garden>
+      <Image
+        src={profile}
+        alt="Max on a city street with a puppy riding in a backpack"
+        width={1000}
+        widths={[500, 1000]}
+        sizes="(max-width: 700px) 100vw, 40vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="photo" data-garden>
+      <Image
+        src={keys}
+        alt="Max playing keyboards on stage"
+        width={720}
+        widths={[360, 720]}
+        sizes="(max-width: 700px) 100vw, 30vw"
+      />
+    </div>
+  </div>
+</Base>
+
+<script>
+  import { plantGardens } from '../home/garden.ts'
+
+  plantGardens(Array.from(document.querySelectorAll<HTMLElement>('[data-garden]')))
+</script>
+
+<style>
+  .photos {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .photo {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    line-height: 0;
+  }
+
+  .photos :global(img) {
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .photo {
+    cursor: crosshair;
+    touch-action: pan-y;
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .photo { cursor: auto; }
+  }
+
+  /* Antialiased electrical paths rendered independently of the image substrate grid. */
+  .photo :global(canvas.garden) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  @media (min-width: 700px) {
+    .photos {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    /* Same height side by side: the square photo and the portrait keyboard photo. */
+    .photos :global(img) {
+      height: min(70vh, 36rem);
+      width: auto;
+      max-width: 100%;
+      object-fit: cover;
+    }
+  }
+</style>
