@@ -30,6 +30,7 @@ import keys from '../assets/personal/keys.png'
       />
     </div>
   </div>
+  <p class="garden-hint">Hold to charge · release to strike · swipe to sever</p>
 </Base>
 
 <script>
@@ -57,15 +58,32 @@ import keys from '../assets/personal/keys.png'
     border-radius: 0;
   }
 
-  /* Image-native branching filaments, one fine pixel per living cell. */
+  .garden-hint {
+    color: var(--muted);
+    font-size: 0.75rem;
+    margin: 0.65rem 0 0;
+    letter-spacing: 0.025em;
+  }
+
+  .photo {
+    cursor: crosshair;
+    touch-action: pan-y;
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .garden-hint { display: none; }
+    .photo { cursor: auto; }
+  }
+
+  /* Antialiased electrical paths rendered independently of the image substrate grid. */
   .photo :global(canvas.garden) {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    image-rendering: pixelated;
     pointer-events: none;
-    transition: opacity 1.5s;
   }
 
   @media (min-width: 700px) {

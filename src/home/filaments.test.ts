@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { Terrain } from './terrain.ts'
+import { Terrain, DIRECTIONS } from './terrain.ts'
 import { Filaments } from './filaments.ts'
 
 function scene(width: number, height: number, color: (x: number, y: number) => number[]) {
@@ -81,14 +81,16 @@ test('pruning clears cells immediately and wakes material-aware healing', () => 
   assert.ok(pixels.every(v => v === 0))
 })
 
-test('transparent seeds, out-of-bounds touches and overcrowded planting are rejected', () => {
+test('invalid seeds and overcrowding are rejected, but an existing wire can be recharged', () => {
   const empty = new Filaments(scene(16, 16, () => [0, 0, 0, 0]), random())
   assert.equal(empty.plant(8, 8), false)
   assert.equal(empty.plant(-1, 8), false)
   const growth = new Filaments(scene(160, 160, () => [90, 105, 75, 255]), random())
   assert.ok(growth.plant(80, 80))
   assert.equal(growth.plant(81, 81), false)
-  assert.equal(growth.plant(80, 80), false)
+  const size = growth.size
+  assert.ok(growth.plant(80, 80))
+  assert.equal(growth.size, size, 'recharging does not duplicate vertices')
 })
 
 test('repeated pruning and recolonization cannot form parent cycles or leak cell ownership', () => {
@@ -126,37 +128,27 @@ test('small images and exhausted fragments settle safely, and can be planted aga
   }
 })
 
-test('pulses advance through parent links, split at branches, and finish without changing topology', () => {
+test('pulses follow real graph distances, split at junctions, and finish without altering geometry', () => {
   const growth = new Filaments(scene(160, 160, () => [90, 105, 75, 255]), random())
-  growth.plant(80, 80)
-  const root = growth.snapshot().roots[0]
-  let discharged = false
-  for (let i = 0; i < 200; i++) {
-    growth.step()
-    if (growth.snapshot().charge[root] === 1) { discharged = true; break }
+  growth.plant(80, 80); evolve(growth)
+  const topology = growth.snapshot(), root = topology.roots[0]
+  const distance = new Int32Array(topology.owner.length).fill(-1), queue = [root]
+  distance[root] = 0
+  for (let i = 0; i < queue.length; i++) for (let d = 0; d < 8; d++) if (topology.links[queue[i]] & (1 << d)) {
+    const [dx, dy] = DIRECTIONS[d], next = queue[i] + dx + dy * 160
+    if (distance[next] < 0) { distance[next] = distance[queue[i]] + 1; queue.push(next) }
   }
-  assert.ok(discharged, 'completed growth launches a final root pulse')
-  const topology = growth.snapshot()
-  assert.ok(growth.active, 'the worker stays awake for the traveling signal')
-  for (let n = 0; n < 12; n++) {
-    const before = growth.snapshot()
+  assert.ok(growth.plant(80, 80, 0.25))
+  for (let n = 1; n <= 12; n++) {
     growth.step()
     const after = growth.snapshot()
-    assert.deepEqual(after.owner, topology.owner)
-    assert.deepEqual(after.parent, topology.parent)
-    for (let cell = 0; cell < before.owner.length; cell++) if (before.owner[cell] >= 0) {
-      const parent = before.parent[cell]
-      let expected = Math.max(before.charge[cell] * 0.58, parent >= 0 ? before.charge[parent] * 0.993 : 0)
-      if (expected < 0.025) expected = 0
-      assert.ok(Math.abs(after.charge[cell] - expected) < 1e-6, `signal at ${cell} must follow its actual parent`)
-    }
+    assert.deepEqual(after.owner, topology.owner); assert.deepEqual(after.links, topology.links)
+    after.charge.forEach((q, cell) => { if (q > 0) assert.ok(distance[cell] >= 0 && distance[cell] < n) })
   }
   const signal = growth.snapshot()
   let peak = root
   signal.charge.forEach((q, cell) => { if (q > signal.charge[peak]) peak = cell })
-  let depth = 0
-  for (let a = peak; signal.parent[a] >= 0; a = signal.parent[a]) depth++
-  assert.equal(depth, 12, 'wavefront advances one connected edge per tick, not by screen distance')
+  assert.equal(distance[peak], 11, 'a pulse advances one graph edge per tick on a uniform conductor')
   evolve(growth)
   assert.equal(growth.active, false)
   assert.ok(growth.snapshot().charge.every(q => q === 0))
@@ -166,16 +158,12 @@ test('sparkling renders are deterministic, brighter at growing tips, and never a
   const terrain = scene(160, 160, () => [90, 105, 75, 255])
   const a = new Filaments(terrain, random()), b = new Filaments(terrain, random())
   a.plant(80, 80); b.plant(80, 80)
-  const pixels = new Uint8ClampedArray(160 * 160 * 4)
   for (let i = 0; i < 20; i++) {
     a.step(); b.step()
-    a.paint(pixels)
-    const sameFrame = pixels.slice()
-    a.paint(pixels)
-    assert.deepEqual(pixels, sameFrame)
+    assert.deepEqual(a.drawing(), a.drawing())
   }
   assert.deepEqual(a.snapshot(), b.snapshot())
-  assert.ok(pixels.some((v, i) => i % 4 === 0 && v > 225), 'tips should sparkle above the muted stem color')
+  assert.ok(a.drawing().nodes.some((v, i) => i % 7 === 6 && v > 0.75), 'tips should carry a bright deterministic spark')
 })
 
 test('cutting and clearing remove signals as well as living cells', () => {
@@ -189,6 +177,87 @@ test('cutting and clearing remove signals as well as living cells', () => {
   growth.clear()
   assert.ok(growth.snapshot().charge.every(q => q === 0))
   assert.equal(growth.active, false)
+})
+
+test('charging gathers potential without growing geometry, and cancelling leaves no activity', () => {
+  const growth = new Filaments(scene(160, 160, () => [90, 105, 75, 255]), random())
+  growth.aim(80, 80, true)
+  const start = growth.drawing().probe!.level
+  for (let i = 0; i < 25; i++) growth.step()
+  assert.equal(growth.size, 0)
+  assert.ok(growth.drawing().probe!.level > start + 0.5)
+  growth.unprime()
+  assert.equal(growth.active, false)
+  assert.equal(growth.drawing().probe, null)
+})
+
+test('neighboring colonies merge through conductive edges, close circuits and still sleep', () => {
+  const terrain = scene(160, 160, () => [90, 105, 75, 255]), growth = new Filaments(terrain, random(7))
+  growth.plant(60, 80, 0.75); growth.plant(100, 80, 0.75); evolve(growth, 600)
+  const { owner, links, roots, closures } = growth.snapshot()
+  let cross = 0
+  for (let cell = 0; cell < owner.length; cell++) if (owner[cell] >= 0) for (let d = 0; d < 8; d++) if (links[cell] & (1 << d)) {
+    const [dx, dy] = DIRECTIONS[d], next = cell + dx + dy * 160
+    assert.ok(links[next] & (1 << ((d + 4) % 8)), 'every wire is reciprocal')
+    assert.ok(terrain.connection(cell, next, roots[owner[cell]]) >= 0.32)
+    assert.ok(terrain.connection(next, cell, roots[owner[next]]) >= 0.32)
+    if (owner[next] !== owner[cell]) cross++
+  }
+  assert.ok(cross > 0, 'separate charges should discover a shared circuit')
+  assert.ok(closures > 0, 'some long branches should close rings')
+  assert.equal(growth.active, false, 'waves cannot endlessly circulate around closed rings')
+})
+
+test('removing a source de-energizes its component and cancels disconnected growth', () => {
+  const growth = new Filaments(scene(160, 160, () => [90, 105, 75, 255]), random())
+  growth.plant(80, 80); evolve(growth)
+  const root = growth.snapshot().roots[0]
+  growth.cut(root % 160, Math.floor(root / 160), 2)
+  assert.ok(growth.snapshot().powered.every(v => v === 0))
+  const size = growth.size
+  evolve(growth, 600)
+  assert.equal(growth.size, size, 'an isolated fragment must not heal from invisible power')
+  assert.ok(growth.snapshot().voltage.every(v => v === 0))
+  assert.ok(growth.snapshot().charge.every(v => v === 0))
+  assert.equal(growth.active, false)
+})
+
+test('shutdown travels through branches instead of fading every line at once', () => {
+  const growth = new Filaments(scene(160, 160, () => [90, 105, 75, 255]), random())
+  growth.plant(80, 80, 0.75); evolve(growth, 600)
+  growth.retire()
+  for (let i = 0; i < 12; i++) growth.step()
+  const { owner, voltage } = growth.snapshot()
+  const levels = voltage.filter((_, i) => owner[i] >= 0)
+  assert.ok(levels.some(v => v < 0.5), 'the power source should already be draining')
+  assert.ok(levels.some(v => v > 0.95), 'distant branches should still be lit')
+  evolve(growth, 600)
+  assert.equal(growth.size, 0)
+  assert.equal(growth.active, false)
+  assert.equal(growth.drawing().nodes.length, 0)
+})
+
+test('returning during shutdown preserves topology and restores the surviving network', () => {
+  const growth = new Filaments(scene(160, 160, () => [90, 105, 75, 255]), random())
+  growth.plant(80, 80); evolve(growth)
+  const topology = growth.snapshot()
+  growth.retire()
+  for (let i = 0; i < 12; i++) growth.step()
+  growth.resume(); evolve(growth, 600)
+  assert.deepEqual(growth.snapshot().owner, topology.owner)
+  assert.deepEqual(growth.snapshot().links, topology.links)
+  assert.ok(growth.snapshot().voltage.every((v, i) => topology.owner[i] < 0 || v === 1))
+  assert.equal(growth.active, false)
+})
+
+test('surface-clipped drawings never illuminate the other side of a silhouette', () => {
+  const terrain = scene(160, 160, x => x < 80 ? [20, 30, 40, 255] : [235, 225, 215, 255])
+  const growth = new Filaments(terrain, random())
+  growth.plant(76, 90, 0.75); evolve(growth)
+  const { nodes, edges, mask } = growth.drawing()
+  assert.ok(nodes.length > 0)
+  assert.ok(mask.every((v, i) => i % 160 < 80 || v === 0), 'even halo clipping stays on the originating surface')
+  assert.ok(edges.every(i => i < nodes.length / 7))
 })
 
 test('painting is an exact view of living image cells, with no template or hidden fog', () => {
