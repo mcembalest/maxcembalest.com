@@ -13,8 +13,11 @@ its own cellular substrate. The same local rule can resemble roots, veins, ivy, 
   persistence, contour alignment, outward pressure and noise. Occasionally it bifurcates.
   Competing fronts, material boundaries and finite energy stop growth naturally. Pruning clears
   actual living cells; wound edges resume growth using the same rule. No hidden state can grow
-  behind a render mask. Conductance brightens shared stems; young tips briefly glimmer.
-- `garden.worker.ts` schedules active growth and transfers frames. Settled patterns sleep.
+  behind a render mask. Growing tips shimmer with deterministic sparks. Charge pulses travel
+  one actual parent/child link per tick, splitting at junctions rather than sweeping across the
+  screen. Seeding and pruning launch pulses; completed growth sends a final discharge. Signals
+  decay to zero, so settled patterns still sleep. Rendering never changes growth randomness.
+- `garden.worker.ts` schedules active growth/signals and transfers frames.
 
 Everything is local to the browser. This is **image geometry, not semantic segmentation or
 3D depth**: similar-colored touching objects can share a substrate, and a shadow can divide
@@ -29,4 +32,8 @@ node tools/garden/inspect.ts /tmp/garden-filaments
 The deterministic preview script writes growth and contour fields for both source photos.
 It uses `sharp`, already available through Astro. Tests cover actual parent/child conductivity,
 branching, bounded growth, thin/curved surfaces, silhouettes, corners, transparency, pruning,
-rendered occupancy, and responsive image sampling.
+rendered occupancy, responsive image sampling, signal transport/cleanup, and deterministic sparks.
+
+To tune the electrical look, adjust `DARK_SPARK` / `LIGHT_SPARK`, `PULSE_DECAY`, and
+`PULSE_TAIL` in `filaments.ts`. Signals only color existing living cells: no glow can leak over
+an image boundary or refill a pruned gap.

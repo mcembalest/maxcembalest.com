@@ -126,6 +126,71 @@ test('small images and exhausted fragments settle safely, and can be planted aga
   }
 })
 
+test('pulses advance through parent links, split at branches, and finish without changing topology', () => {
+  const growth = new Filaments(scene(160, 160, () => [90, 105, 75, 255]), random())
+  growth.plant(80, 80)
+  const root = growth.snapshot().roots[0]
+  let discharged = false
+  for (let i = 0; i < 200; i++) {
+    growth.step()
+    if (growth.snapshot().charge[root] === 1) { discharged = true; break }
+  }
+  assert.ok(discharged, 'completed growth launches a final root pulse')
+  const topology = growth.snapshot()
+  assert.ok(growth.active, 'the worker stays awake for the traveling signal')
+  for (let n = 0; n < 12; n++) {
+    const before = growth.snapshot()
+    growth.step()
+    const after = growth.snapshot()
+    assert.deepEqual(after.owner, topology.owner)
+    assert.deepEqual(after.parent, topology.parent)
+    for (let cell = 0; cell < before.owner.length; cell++) if (before.owner[cell] >= 0) {
+      const parent = before.parent[cell]
+      let expected = Math.max(before.charge[cell] * 0.58, parent >= 0 ? before.charge[parent] * 0.993 : 0)
+      if (expected < 0.025) expected = 0
+      assert.ok(Math.abs(after.charge[cell] - expected) < 1e-6, `signal at ${cell} must follow its actual parent`)
+    }
+  }
+  const signal = growth.snapshot()
+  let peak = root
+  signal.charge.forEach((q, cell) => { if (q > signal.charge[peak]) peak = cell })
+  let depth = 0
+  for (let a = peak; signal.parent[a] >= 0; a = signal.parent[a]) depth++
+  assert.equal(depth, 12, 'wavefront advances one connected edge per tick, not by screen distance')
+  evolve(growth)
+  assert.equal(growth.active, false)
+  assert.ok(growth.snapshot().charge.every(q => q === 0))
+})
+
+test('sparkling renders are deterministic, brighter at growing tips, and never affect growth randomness', () => {
+  const terrain = scene(160, 160, () => [90, 105, 75, 255])
+  const a = new Filaments(terrain, random()), b = new Filaments(terrain, random())
+  a.plant(80, 80); b.plant(80, 80)
+  const pixels = new Uint8ClampedArray(160 * 160 * 4)
+  for (let i = 0; i < 20; i++) {
+    a.step(); b.step()
+    a.paint(pixels)
+    const sameFrame = pixels.slice()
+    a.paint(pixels)
+    assert.deepEqual(pixels, sameFrame)
+  }
+  assert.deepEqual(a.snapshot(), b.snapshot())
+  assert.ok(pixels.some((v, i) => i % 4 === 0 && v > 225), 'tips should sparkle above the muted stem color')
+})
+
+test('cutting and clearing remove signals as well as living cells', () => {
+  const growth = new Filaments(scene(160, 160, () => [90, 105, 75, 255]), random())
+  growth.plant(80, 80)
+  for (let i = 0; i < 15; i++) growth.step()
+  growth.cut(80, 80, 6)
+  const { owner, charge } = growth.snapshot()
+  for (let i = 0; i < owner.length; i++) if (owner[i] < 0) assert.equal(charge[i], 0)
+  evolve(growth)
+  growth.clear()
+  assert.ok(growth.snapshot().charge.every(q => q === 0))
+  assert.equal(growth.active, false)
+})
+
 test('painting is an exact view of living image cells, with no template or hidden fog', () => {
   const growth = new Filaments(scene(160, 160, () => [90, 105, 75, 255]), random())
   growth.plant(80, 80); evolve(growth)
