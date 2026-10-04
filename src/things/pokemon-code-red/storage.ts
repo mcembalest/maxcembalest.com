@@ -1,6 +1,8 @@
 // Private to this browser/origin. No upload, account, or server-side save storage.
-import { MOD_SHA1 } from './patch'
+import { BASE_SHA1, MOD_SHA1 } from './patch.ts'
 
+// Source identity is independent of the patched ROM and emulator/core versions.
+export const SOURCE_KEY = `source:${BASE_SHA1}`
 export const ROM_KEY = `rom:${MOD_SHA1}`
 export const STATE_KEY = `state:${MOD_SHA1}:emulatorjs-4.2.3:mailbox-core-v2`
 

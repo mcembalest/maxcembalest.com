@@ -1,11 +1,11 @@
 diff --git a/link.T b/link.T
-index 9e82b5d..1023cbb 100644
+index 9e82b5d..febaaf1 100644
 --- a/link.T
 +++ b/link.T
 @@ -1,4 +1,4 @@
  {
 -   global: retro_*;
-+   global: retro_*; ejs_code_red_epoch; ejs_code_red_snapshot; ejs_code_red_reply; ejs_code_red_epoch; ejs_code_red_snapshot; ejs_code_red_reply;
++   global: retro_*; ejs_code_red_epoch; ejs_code_red_snapshot; ejs_code_red_reply; ejs_code_red_text_snapshot; ejs_code_red_text_write; ejs_code_red_epoch; ejs_code_red_snapshot; ejs_code_red_reply; ejs_code_red_epoch; ejs_code_red_snapshot; ejs_code_red_reply;
     local: *;
  };
 diff --git a/src/platform/libretro/libretro.c b/src/platform/libretro/libretro.c

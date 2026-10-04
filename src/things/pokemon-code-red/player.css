@@ -10,3 +10,8 @@
 .code-red-save small { font-size: 0.75rem; line-height: 1.4; }
 .code-red-credit { font-size: 0.7rem; margin-block: 0.65rem; }
 @media (min-width: 700px) { .code-red-game { min-height: 500px; } }
+.code-red-text-entry { display: flex; flex-wrap: wrap; align-items: end; gap: .6rem; margin-block: 1rem; }
+.code-red-text-entry[hidden] { display: none; }
+.code-red-text-entry label { display: grid; gap: .25rem; }
+.code-red-text-entry input { max-width: 100%; font-size: 16px; padding: .5rem; }
+.code-red-text-entry small { flex-basis: 100%; }

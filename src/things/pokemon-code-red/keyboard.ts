@@ -48,7 +48,7 @@ export function bindGameKeyboard(game: HTMLElement, gm: GameInput, menuOpen: () 
     event.stopImmediatePropagation()
     if (event.code === 'Space') {
       if (event.type === 'keyup') { if (speeding) gm.functions.toggleFastForward(0); speeding = false }
-      else if (!event.repeat && !speeding) { gm.functions.setFastForwardRatio(3); gm.functions.toggleFastForward(1); speeding = true }
+      else if (!event.repeat && !speeding) { gm.functions.setFastForwardRatio(10); gm.functions.toggleFastForward(1); speeding = true }
     } else if (event.type === 'keyup') gm.simulateInput(0, index, 0)
     else if (!event.repeat) gm.simulateInput(0, index, 1)
   }

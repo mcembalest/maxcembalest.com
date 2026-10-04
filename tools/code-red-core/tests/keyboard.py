@@ -17,7 +17,7 @@ with tempfile.TemporaryDirectory() as temp:
   y=page.evaluate('scrollY');page.keyboard.down('ArrowDown');page.keyboard.down('Space');page.keyboard.down('Space');page.wait_for_timeout(150)
   assert page.evaluate('scrollY')==y
   assert page.evaluate('calls.filter(c=>c[0]==="speed"&&c[1]===1).length')==1
-  assert page.evaluate('calls.some(c=>c[0]==="ratio"&&c[1]===3)')
+  assert page.evaluate('calls.some(c=>c[0]==="ratio"&&c[1]===10)')
   page.keyboard.up('Space');page.keyboard.up('ArrowDown');assert page.evaluate('calls.some(c=>c[0]==="speed"&&c[1]===0)')
   page.keyboard.down('Space');page.keyboard.down('ArrowLeft');page.locator('#outside').click()
   assert page.evaluate('calls.at(-1)')==['input',0,6,0]
@@ -33,5 +33,5 @@ with tempfile.TemporaryDirectory() as temp:
    game.click(position={'x':250,'y':80});page.evaluate(trigger);assert page.evaluate('document.activeElement.id')=='game';before=page.evaluate('calls.filter(c=>c[0]==="speed"&&c[1]===1).length');page.keyboard.down('Space');assert page.evaluate('calls.filter(c=>c[0]==="speed"&&c[1]===1).length')==before+1;page.keyboard.up('Space')
   # Model the upstream bubble listener: menus must receive capture-bypassed keys.
   game.click(position={'x':250,'y':80});page.keyboard.down('ArrowLeft');page.evaluate('window.menuOpen=true;window.upstream=[];document.querySelector("#game").addEventListener("keydown",e=>upstream.push([e.code,e.defaultPrevented]))');before=page.evaluate('calls.length');page.keyboard.press('ArrowDown');page.keyboard.press('Space');assert page.evaluate('upstream')==[['ArrowDown',False],['Space',False]];assert page.evaluate('calls.slice('+str(before)+')')==[['input',0,6,0]];page.keyboard.up('ArrowLeft');page.evaluate('menuOpen=false')
-  page.evaluate('binding.dispose();binding.dispose()');print(json.dumps({'holdSpace3x':True,'releaseNormal':True,'keyRepeatNoToggle':True,'focusedKeysNoScroll':True,'outsideRestoresScroll':True,'outsideAndInsideTypingPreserved':True,'blurHideResetReleases':True,'idempotentDispose':True,'windowAndTabRefocus':True,'persistedPageFocusRestored':True,'popupKeysReachUpstream':True},indent=2));b.close()
+  page.evaluate('binding.dispose();binding.dispose()');print(json.dumps({'holdSpace10x':True,'releaseNormal':True,'keyRepeatNoToggle':True,'focusedKeysNoScroll':True,'outsideRestoresScroll':True,'outsideAndInsideTypingPreserved':True,'blurHideResetReleases':True,'idempotentDispose':True,'windowAndTabRefocus':True,'persistedPageFocusRestored':True,'popupKeysReachUpstream':True},indent=2));b.close()
  server.shutdown()
