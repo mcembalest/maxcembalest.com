@@ -1,11 +1,12 @@
 .code-red { max-width: 760px; }
-.code-red-choose { display: inline-flex; align-items: center; min-height: 48px; padding: 0.65rem 1.1rem; border-radius: 8px; background: var(--link); color: var(--bg); cursor: pointer; font-weight: 600; }
-.code-red-file { display: block; max-width: 100%; margin-top: 0.7rem; }
-.code-red-status { color: var(--muted); min-height: 1.65em; }
+.code-red-button { min-height: 44px; padding: 0.55rem 1.1rem; border: 0; border-radius: 8px; background: var(--link); color: var(--bg); cursor: pointer; font-weight: 600; }
+.code-red-button:disabled { opacity: 0.5; cursor: default; }
+.code-red-status { color: var(--muted); min-height: 1.65em; margin-block: 0.65rem; font-size: 0.9rem; }
 .code-red-error { color: #b82727; overflow-wrap: anywhere; }
 .code-red-game { width: 100%; height: min(78dvh, 650px); min-height: 450px; background: #080808; border-radius: 10px; overflow: hidden; scroll-margin-top: 12px; }
-.code-red-game[hidden] { display: none; }
-.code-red-hash { overflow-wrap: anywhere; }
-.code-red-links { font-size: 0.85rem; }
-.code-red:has(.code-red-file:focus-visible) .code-red-choose { outline: 2px solid var(--text); outline-offset: 3px; }
+.code-red [hidden] { display: none; }
+.code-red-game .b_speed_fast, .code-red-game .b_speed_slow { display: none; }
+.code-red-save { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.65rem; }
+.code-red-save small { font-size: 0.75rem; line-height: 1.4; }
+.code-red-credit { font-size: 0.7rem; margin-block: 0.65rem; }
 @media (min-width: 700px) { .code-red-game { min-height: 500px; } }
