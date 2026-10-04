@@ -1,5 +1,13 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", ".code-red-cache", "public/code-red-emulator"]
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ],
+  "exclude": [
+    "dist",
+    ".code-red-cache",
+    "public/code-red-emulator",
+    "public/code-red-runner"
+  ]
 }

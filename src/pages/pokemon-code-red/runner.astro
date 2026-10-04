@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro'
+---
+<Base title="Code Red code fixture" description="A separate bounded JavaScript experiment using Gen III Pokémon stats." section="/games">
+  <p class="muted"><a href="/pokemon-code-red">Code Red</a> / Code fixture</p>
+  <h1>Code fixture</h1>
+  <p>Run JavaScript against Bulbasaur’s Gen III base stats. This experiment is separate from the game.</p>
+  <p class="muted">The function receives <code>input.baseStats</code> and returns JSON. No network or game access.</p>
+  <label for="source">JavaScript function body</label>
+  <textarea id="source" spellcheck="false">{"return {total: Object.values(input.baseStats).reduce((a,b) => a+b, 0)};"}</textarea>
+  <div class="actions"><button id="run" type="button" disabled>Run</button><button id="cancel" type="button">Cancel</button></div>
+  <pre id="result" role="status" aria-live="polite">Ready when the fixture loads.</pre>
+  <details><summary>Fixture data and limits</summary><p>HP 45, Attack 49, Defense 49, Special Attack 65, Special Defense 65, Speed 45. Total 318. <a href="https://www.serebii.net/pokedex-rs/001.shtml">Serebii Gen III source</a>.</p><p>8 KiB source, 4 KiB input/output, 8 MiB guest heap, 128 KiB stack, 250 ms execution budget and 3-second worker lifetime. Each run starts fresh. This prototype is not an absolute security guarantee.</p></details>
+  <p class="muted"><small>QuickJS/WASM · <a href="/code-red-runner/LICENSES.txt">Licenses</a></small></p>
+  <noscript><p>JavaScript is needed to run the fixture.</p></noscript>
+  <script is:inline type="module" src="/code-red-runner/ui.js"></script>
+</Base>
+<style>
+  label{display:block;margin-bottom:.5rem}textarea{box-sizing:border-box;width:100%;min-height:130px;padding:12px;font:14px monospace;color:inherit;background:transparent;border:1px solid #999;border-radius:8px}button{min-height:44px;padding:10px 20px;font:inherit;cursor:pointer}.actions{display:flex;gap:10px;margin:12px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere;min-height:70px}details{margin:20px 0}summary{cursor:pointer}
+</style>

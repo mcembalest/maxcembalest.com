@@ -7,8 +7,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "test": "node --test 'src/**/*.test.ts'",
-    "prebuild": "node tools/prepare-code-red-emulator.mjs",
-    "predev": "node tools/prepare-code-red-emulator.mjs"
+    "prebuild": "node tools/prepare-code-red-emulator.mjs && node tools/prepare-code-red-runner.mjs",
+    "predev": "node tools/prepare-code-red-emulator.mjs && node tools/prepare-code-red-runner.mjs"
   },
   "dependencies": {
     "astro": "^7.3.5"
@@ -16,6 +16,8 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@types/node": "^26.6.3",
+    "esbuild": "0.28.2",
+    "quickjs-emscripten": "0.32.0",
     "typescript": "^6.0.3"
   }
 }
