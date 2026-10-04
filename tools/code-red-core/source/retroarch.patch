@@ -1,0 +1,11 @@
+diff --git a/Makefile.emulatorjs b/Makefile.emulatorjs
+index fbf6fa57c0..6375052291 100644
+--- a/Makefile.emulatorjs
++++ b/Makefile.emulatorjs
+@@ -335,3 +335,6 @@ clean:
+ 	rm -f $(TARGET)
+ 
+ .PHONY: all clean mv_libretro
++
++# Code Red narrow mailbox exports
++EXPORTED_FUNCTIONS := $(EXPORTED_FUNCTIONS),_ejs_code_red_epoch,_ejs_code_red_snapshot,_ejs_code_red_reply

@@ -1,7 +1,7 @@
 // Official, integrity-pinned emulator packages only. No game or BIOS downloads.
 import { createHash } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
-import { existsSync, mkdirSync, readFileSync, writeFileSync, cpSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync, cpSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -9,9 +9,16 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const cache = join(root, '.code-red-cache')
 const output = join(root, 'public', 'code-red-emulator')
 const lock = JSON.parse(readFileSync(join(root, 'tools/code-red-emulator.lock.json'), 'utf8'))
-const stamp = JSON.stringify({ packages: lock, disableUpdateCheck: 1 })
+const customPath = join(root, 'tools/code-red-core/mgba-wasm.data')
+const customHash = '4a0744b88a8c74c026dc57c35b97d0c45adb275a31601b455c9678688368cbf4'
+if (createHash('sha256').update(readFileSync(customPath)).digest('hex') !== customHash) throw new Error('Custom Code Red core integrity mismatch')
+const sourceDigest = createHash('sha256')
+for (const name of ['README.md', 'sources.lock.json', ...readdirSync(join(root, 'tools/code-red-core/source')).sort().map(name => `source/${name}`)]) {
+  sourceDigest.update(name).update(readFileSync(join(root, 'tools/code-red-core', name)))
+}
+const stamp = JSON.stringify({ packages: lock, disableUpdateCheck: 1, customHash, sourceHash: sourceDigest.digest('hex') })
 const installed = join(cache, 'installed.json')
-if (existsSync(installed) && readFileSync(installed, 'utf8') === stamp && existsSync(join(output, 'cores/mgba-wasm.data'))) {
+if (existsSync(installed) && readFileSync(installed, 'utf8') === stamp && existsSync(join(output, 'cores/code-red-mgba-wasm.data')) && existsSync(join(output, 'code-red-source/README.md'))) {
   console.log('Code Red browser emulator ready.')
   process.exit(0)
 }
@@ -37,6 +44,10 @@ for (const name of ['mgba-wasm.data', 'mgba-legacy-wasm.data', 'mgba-thread-wasm
   cpSync(join(cache, 'gba_core/package', name), join(output, 'cores', name))
 }
 cpSync(join(cache, 'gba_core/package/reports/mgba.json'), join(output, 'cores/reports/mgba.json'))
+cpSync(customPath, join(output, 'cores/code-red-mgba-wasm.data'))
+cpSync(join(root, 'tools/code-red-core/sources.lock.json'), join(output, 'CODE-RED-SOURCES.json'))
+cpSync(join(root, 'tools/code-red-core/source'), join(output, 'code-red-source'), { recursive: true })
+cpSync(join(root, 'tools/code-red-core/README.md'), join(output, 'code-red-source/README.md'))
 const sourcePath = join(output, 'src/emulator.js')
 const source = readFileSync(sourcePath, 'utf8')
 const check = 'if (this.debug || (window.location && ["localhost", "127.0.0.1"].includes(location.hostname))) this.checkForUpdates();'
