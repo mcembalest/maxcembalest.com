@@ -1,4 +1,5 @@
 import { BASE_SHA1, MOD_SHA1, ROM_SIZE, sha1 } from './patch'
+import { bindGameKeyboard, type GameInput } from './keyboard'
 import { applyCopyPatch } from './copy-patch'
 import { readLocal, writeLocal, ROM_KEY, STATE_KEY } from './storage'
 
@@ -16,7 +17,7 @@ type EmulatorWindow = Window & {
   EJS_defaultOptions?: Record<string, string>
   EJS_Buttons?: Record<string, boolean | { visible?: boolean; displayName?: string }>
   EJS_onGameStart?: () => void
-  EJS_emulator?: { on(event: string, callback: () => void): void; gameManager: { Module: unknown; getState(): Uint8Array; loadState(bytes: Uint8Array): void } }
+  EJS_emulator?: { on(event: string, callback: () => void): void; settingsMenu: HTMLElement; controlPopup: HTMLElement; isPopupOpen(): boolean; gameManager: GameInput & { getState(): Uint8Array; loadState(bytes: Uint8Array): void } }
 }
 
 export function mount(root: HTMLElement) {
@@ -28,11 +29,12 @@ export function mount(root: HTMLElement) {
   const saveBar = root.querySelector<HTMLElement>('[data-save-bar]')!
   const save = root.querySelector<HTMLButtonElement>('[data-save]')!
   const emulator = window as EmulatorWindow
+  let keyboard: ReturnType<typeof bindGameKeyboard> | undefined
   let mailbox: { dispose(): void } | undefined
   let loaded = false
   let remembered = false
   let gameUrl: string | undefined
-  window.addEventListener('pagehide', () => { mailbox?.dispose(); if (gameUrl) URL.revokeObjectURL(gameUrl) })
+  window.addEventListener('pagehide', (event) => { if (event.persisted) { keyboard?.release(); return }; keyboard?.dispose(); mailbox?.dispose(); if (gameUrl) URL.revokeObjectURL(gameUrl) })
   root.querySelector<HTMLButtonElement>('[data-choose]')!.onclick = () => input.click()
 
   async function start(bytes: Uint8Array) {
@@ -41,7 +43,7 @@ export function mount(root: HTMLElement) {
     gameUrl = URL.createObjectURL(new Blob([new Uint8Array(bytes).buffer], { type: 'application/octet-stream' }))
     emulator.EJS_player = '#code-red-game'
     emulator.EJS_core = 'gba'
-    emulator.EJS_gameName = 'Pokemon Code Red mailbox v1'
+    emulator.EJS_gameName = 'Pokemon Code Red PC mailbox v2'
     emulator.EJS_gameUrl = gameUrl
     emulator.EJS_pathtodata = '/code-red-emulator/'
     emulator.EJS_DEBUG_XX = true
@@ -61,7 +63,11 @@ export function mount(root: HTMLElement) {
         const path = '/code-red-runner/mailbox.js'
         const { MailboxController } = await import(/* @vite-ignore */ path)
         mailbox = new MailboxController(emulator.EJS_emulator!.gameManager.Module)
-        emulator.EJS_emulator!.on('exit', () => { mailbox?.dispose(); save.disabled = true })
+        keyboard = bindGameKeyboard(game, emulator.EJS_emulator!.gameManager, () => {
+          const current = emulator.EJS_emulator!
+          return current.settingsMenu.style.display !== 'none' || current.isPopupOpen() || current.controlPopup.parentElement!.parentElement!.getAttribute('hidden') === null
+        })
+        emulator.EJS_emulator!.on('exit', () => { keyboard?.dispose(); mailbox?.dispose(); save.disabled = true })
       } catch {
         status.textContent = 'The calculation bridge could not start. Reload to try again.'
         return

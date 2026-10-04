@@ -1,5 +1,5 @@
 export const BASE_SHA1 = '41cb23d8dccc8ebd7c649cd8fbb58eeace6e2fdc'
-export const MOD_SHA1 = 'd3ddd18cc5466b78624e3ce7c6db779ed2a15cd9'
+export const MOD_SHA1 = '26aabc43b16c1da4c0f5eed8b102948289d82639'
 export const ROM_SIZE = 16 * 1024 * 1024
 
 export function applyIps(base: Uint8Array, patch: Uint8Array): Uint8Array {

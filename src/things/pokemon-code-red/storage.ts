@@ -2,7 +2,7 @@
 import { MOD_SHA1 } from './patch'
 
 export const ROM_KEY = `rom:${MOD_SHA1}`
-export const STATE_KEY = `state:${MOD_SHA1}:emulatorjs-4.2.3:mailbox-core-v1`
+export const STATE_KEY = `state:${MOD_SHA1}:emulatorjs-4.2.3:mailbox-core-v2`
 
 function open(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {

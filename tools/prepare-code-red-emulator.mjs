@@ -10,7 +10,7 @@ const cache = join(root, '.code-red-cache')
 const output = join(root, 'public', 'code-red-emulator')
 const lock = JSON.parse(readFileSync(join(root, 'tools/code-red-emulator.lock.json'), 'utf8'))
 const customPath = join(root, 'tools/code-red-core/mgba-wasm.data')
-const customHash = '4a0744b88a8c74c026dc57c35b97d0c45adb275a31601b455c9678688368cbf4'
+const customHash = 'd294346470e1543875778c07400841a81ee232bb53939e2957cdaafb7b672175'
 if (createHash('sha256').update(readFileSync(customPath)).digest('hex') !== customHash) throw new Error('Custom Code Red core integrity mismatch')
 const sourceDigest = createHash('sha256')
 for (const name of ['README.md', 'sources.lock.json', ...readdirSync(join(root, 'tools/code-red-core/source')).sort().map(name => `source/${name}`)]) {
