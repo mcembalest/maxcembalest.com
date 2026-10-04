@@ -5,3 +5,8 @@ dist
 .DS_Store
 *.log
 .env*
+.code-red-cache/
+public/code-red-emulator/
+*.gba
+*.sav
+*.srm

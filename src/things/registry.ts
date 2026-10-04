@@ -10,6 +10,11 @@ export interface Thing {
 
 export const things: Thing[] = [
   {
+    slug: 'pokemon-code-red',
+    title: 'Pokémon Code Red',
+    description: 'A FireRed starter mod. Choose your own game file and play on your phone.',
+  },
+  {
     slug: 'tessellate',
     title: 'Tessellate',
     description: 'A simple and surprising two-player board game.',

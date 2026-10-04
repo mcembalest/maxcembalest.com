@@ -1,0 +1,11 @@
+.code-red { max-width: 760px; }
+.code-red-choose { display: inline-flex; align-items: center; min-height: 48px; padding: 0.65rem 1.1rem; border-radius: 8px; background: var(--link); color: var(--bg); cursor: pointer; font-weight: 600; }
+.code-red-file { display: block; max-width: 100%; margin-top: 0.7rem; }
+.code-red-status { color: var(--muted); min-height: 1.65em; }
+.code-red-error { color: #b82727; overflow-wrap: anywhere; }
+.code-red-game { width: 100%; height: min(78dvh, 650px); min-height: 450px; background: #080808; border-radius: 10px; overflow: hidden; scroll-margin-top: 12px; }
+.code-red-game[hidden] { display: none; }
+.code-red-hash { overflow-wrap: anywhere; }
+.code-red-links { font-size: 0.85rem; }
+.code-red:has(.code-red-file:focus-visible) .code-red-choose { outline: 2px solid var(--text); outline-offset: 3px; }
+@media (min-width: 700px) { .code-red-game { min-height: 500px; } }

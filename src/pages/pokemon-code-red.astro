@@ -1,0 +1,29 @@
+---
+import Thing from '../layouts/Thing.astro'
+import '../things/pokemon-code-red/player.css'
+---
+
+<Thing slug="pokemon-code-red">
+  <section class="code-red" data-code-red>
+    <p>Choose your own English USA FireRed v1.0 <code>.gba</code> file from Files, then play. The Code Red starter patch applies on your phone. Your game file stays on your device.</p>
+    <label class="code-red-choose" for="code-red-file">Choose FireRed file</label>
+    <input id="code-red-file" class="code-red-file" data-file type="file" accept=".gba,application/octet-stream" />
+    <p class="code-red-status" data-status role="status" aria-live="polite">No game file selected.</p>
+    <p class="code-red-error" data-error role="alert" hidden></p>
+    <div id="code-red-game" class="code-red-game" data-game hidden aria-label="Code Red game player"></div>
+    <p class="muted">Starter change: “CODE RED dev build!” appears in Oak’s new-game introduction. Use a new game to see it. The broader mod is still being built.</p>
+    <details>
+      <summary>File requirements and saves</summary>
+      <p>Use your legally obtained FireRed USA English v1.0 / revision 0 dump, 16,777,216 bytes. v1.1, LeafGreen, and other modified files are not supported. An existing Code Red starter build also works.</p>
+      <p>Base SHA-1: <code class="code-red-hash">41cb23d8dccc8ebd7c649cd8fbb58eeace6e2fdc</code></p>
+      <p>Use the emulator menu to export and import saves. Export your save before switching devices or preview URLs. A preview URL does not sync saves.</p>
+    </details>
+    <p class="muted code-red-links"><a href="/code-red-starter.ips" download>Starter patch</a> · <a href="https://github.com/mcembalest/pokemon-code-red/tree/dev/initial-loop">Mod source</a> · <a href="/code-red-emulator/SOURCES.txt">Emulator sources</a> · <a href="/code-red-emulator/LICENSE">Emulator license</a></p>
+    <noscript><p>JavaScript is needed to play this game.</p></noscript>
+  </section>
+</Thing>
+
+<script>
+  import { mount } from '../things/pokemon-code-red/player'
+  mount(document.querySelector<HTMLElement>('[data-code-red]')!)
+</script>
