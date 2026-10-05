@@ -10,6 +10,11 @@ export interface Thing {
 
 export const things: Thing[] = [
   {
+    slug: 'pokemon-code-red',
+    title: 'Pokémon Code Red',
+    description: 'FireRed, except the Pokémon are coding agents. Bring your own game file.',
+  },
+  {
     slug: 'tessellate',
     title: 'Tessellate',
     description: 'A simple and surprising two-player board game.',
@@ -17,7 +22,7 @@ export const things: Thing[] = [
 ]
 
 // Top-level paths that belong to the site itself, so no applet can claim them.
-export const reserved = ['cv', 'games', 'music', '404', 'index', 'favicon', 'media', '_astro']
+export const reserved = ['cv', 'games', 'music', '404', 'index', 'favicon', 'media', '_astro', 'code-red']
 
 export const thing = (slug: string) => {
   const found = things.find((t) => t.slug === slug)
