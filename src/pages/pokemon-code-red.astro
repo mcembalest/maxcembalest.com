@@ -1,0 +1,21 @@
+---
+import Thing from '../layouts/Thing.astro'
+import lock from '../things/pokemon-code-red/bundle.lock.json'
+---
+
+<Thing slug="pokemon-code-red">
+  <link rel="stylesheet" href="/code-red/code-red.css" />
+  <div data-code-red></div>
+  <noscript><p>JavaScript is needed to play.</p></noscript>
+  <p class="muted"><small>
+    <a href="https://github.com/mcembalest/pokemon-code-red">Source</a> ·
+    <a href="/code-red/emulator/SOURCES.txt">EmulatorJS</a> ·
+    <a href="/code-red/emulator/LICENSE">License</a> ·
+    {lock.tag}
+  </small></p>
+</Thing>
+
+<script is:inline type="module">
+  import { mount } from '/code-red/code-red.js'
+  mount(document.querySelector('[data-code-red]'), { assets: '/code-red/' })
+</script>

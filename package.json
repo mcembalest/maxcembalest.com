@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "node tools/fetch-code-red.mjs",
     "dev": "astro dev",
+    "prebuild": "node tools/fetch-code-red.mjs",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "test": "node --test 'src/**/*.test.ts'"
