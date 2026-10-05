@@ -8,4 +8,6 @@ only pins one bundle and embeds it.
 - `tools/fetch-code-red.mjs` — downloads + verifies it into `public/code-red/` (ignored) before dev/build
 - `src/pages/pokemon-code-red.astro` — mounts it
 
-Update: set `tag` and `sha256` from the release's `.sha256` file.
+Updates are automatic: `.github/workflows/code-red-update.yml` checks every 15 minutes for a newer
+`player-*` release and commits the new pin to main (Vercel deploys it). To roll back, revert that commit.
+To pause updates, disable the workflow in the Actions tab.
