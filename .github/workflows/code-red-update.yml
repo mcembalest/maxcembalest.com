@@ -1,0 +1,48 @@
+name: code-red-update
+# Keep Pokémon Code Red current without PRs: when mcembalest/pokemon-code-red publishes a
+# new player bundle (only after its full test suite passes on main), commit the new pin to
+# main. Vercel deploys on push. Revert the commit to roll back.
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: code-red-update
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find latest player bundle
+        id: latest
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=$(gh release list --repo mcembalest/pokemon-code-red --limit 50 --json tagName,createdAt \
+                --jq '[.[] | select(.tagName | startswith("player-"))] | sort_by(.createdAt) | last | .tagName')
+          CURRENT=$(python3 -c "import json;print(json.load(open('src/things/pokemon-code-red/bundle.lock.json'))['tag'])")
+          echo "latest=$TAG current=$CURRENT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          [ -n "$TAG" ] && [ "$TAG" != "$CURRENT" ] && echo "changed=1" >> "$GITHUB_OUTPUT" || true
+      - name: Verify and pin
+        if: steps.latest.outputs.changed
+        env:
+          TAG: ${{ steps.latest.outputs.tag }}
+        run: |
+          BASE=https://github.com/mcembalest/pokemon-code-red/releases/download/$TAG
+          curl -fsSL -o bundle.tar.gz "$BASE/code-red-player.tar.gz"
+          SHA=$(curl -fsSL "$BASE/code-red-player.tar.gz.sha256" | cut -d' ' -f1)
+          echo "$SHA  bundle.tar.gz" | sha256sum -c -
+          tar -tzf bundle.tar.gz | grep -qx './code-red.js'
+          rm bundle.tar.gz
+          printf '{\n  "repo": "mcembalest/pokemon-code-red",\n  "tag": "%s",\n  "sha256": "%s"\n}\n' "$TAG" "$SHA" > src/things/pokemon-code-red/bundle.lock.json
+      - name: Commit to main
+        if: steps.latest.outputs.changed
+        env:
+          TAG: ${{ steps.latest.outputs.tag }}
+        run: |
+          git config user.name "code-red-update"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Code Red: player $TAG" -m "Automatic: published by mcembalest/pokemon-code-red after its tests passed on main."
+          git push origin HEAD:main
