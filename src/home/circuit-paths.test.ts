@@ -3,7 +3,7 @@ import { test } from 'node:test'
 import { circuitPaths } from './circuit-paths.ts'
 
 function nodes(points: number[][]) {
-  return Float32Array.from(points.flatMap(([x, y]) => [x, y, 1, 0, 0.5, 0, 0]))
+  return Float32Array.from(points.flatMap(([x, y]) => [x, y, 1, 0, 0.5, 0, 0, 0.5]))
 }
 
 test('rounded chains cover every wire once, including junctions and closed circuits', () => {

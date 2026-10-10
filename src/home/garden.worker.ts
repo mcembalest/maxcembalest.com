@@ -3,7 +3,7 @@ import { Terrain } from './terrain.ts'
 import { Filaments, type CircuitDrawing } from './filaments.ts'
 
 export type Message =
-  | { type: 'init'; id: number; width: number; height: number; revision: number; pixels: ArrayBuffer }
+  | { type: 'init'; id: number; width: number; height: number; revision: number; pixels: ArrayBuffer; scene?: ArrayBuffer }
   | { type: 'aim'; id: number; x: number; y: number; held: boolean }
   | { type: 'fire'; id: number; x: number; y: number; strength: number }
   | { type: 'cancel'; id: number }
@@ -54,7 +54,7 @@ self.onmessage = (e: MessageEvent<Message>) => {
   const m = e.data
   if (m.type === 'init') {
     photos.set(m.id, { width: m.width, height: m.height, revision: m.revision,
-      growth: new Filaments(new Terrain(m.width, m.height, new Uint8ClampedArray(m.pixels))) })
+      growth: new Filaments(new Terrain(m.width, m.height, new Uint8ClampedArray(m.pixels), m.scene && new Uint8ClampedArray(m.scene))) })
     return
   }
   const photo = photos.get(m.id)

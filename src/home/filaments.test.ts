@@ -128,42 +128,38 @@ test('small images and exhausted fragments settle safely, and can be planted aga
   }
 })
 
-test('pulses follow real graph distances, split at junctions, and finish without altering geometry', () => {
+test('a strike lights the whole powered network in one frame, strobes, scorches and goes dark', () => {
   const growth = new Filaments(scene(160, 160, () => [90, 105, 75, 255]), random())
   growth.plant(80, 80); evolve(growth)
-  const topology = growth.snapshot(), root = topology.roots[0]
-  const distance = new Int32Array(topology.owner.length).fill(-1), queue = [root]
-  distance[root] = 0
-  for (let i = 0; i < queue.length; i++) for (let d = 0; d < 8; d++) if (topology.links[queue[i]] & (1 << d)) {
-    const [dx, dy] = DIRECTIONS[d], next = queue[i] + dx + dy * 160
-    if (distance[next] < 0) { distance[next] = distance[queue[i]] + 1; queue.push(next) }
-  }
-  assert.ok(growth.plant(80, 80, 0.25))
-  for (let n = 1; n <= 12; n++) {
-    growth.step()
-    const after = growth.snapshot()
-    assert.deepEqual(after.owner, topology.owner); assert.deepEqual(after.links, topology.links)
-    after.charge.forEach((q, cell) => { if (q > 0) assert.ok(distance[cell] >= 0 && distance[cell] < n) })
-  }
-  const signal = growth.snapshot()
-  let peak = root
-  signal.charge.forEach((q, cell) => { if (q > signal.charge[peak]) peak = cell })
-  assert.equal(distance[peak], 11, 'a pulse advances one graph edge per tick on a uniform conductor')
+  const topology = growth.snapshot()
+  assert.ok(topology.burn.some(b => b > 0), 'the first return stroke should leave a scar')
+  assert.ok(growth.plant(80, 80))
+  const levels: number[] = []
+  growth.step()
+  const first = growth.snapshot()
+  first.owner.forEach((id, cell) => { if (id >= 0) assert.ok(first.charge[cell] > 0, 'no wire waits for a traveling glow') })
+  levels.push(Math.max(...first.charge))
+  for (let k = 0; k < 40 && growth.active; k++) { growth.step(); levels.push(Math.max(...growth.snapshot().charge)) }
+  const dark = levels.indexOf(0)
+  assert.ok(dark > 0 && levels.slice(dark).some(v => v > 0.4), 're-strikes follow a dark gap')
   evolve(growth)
+  const after = growth.snapshot()
+  assert.deepEqual(after.owner, topology.owner); assert.deepEqual(after.links, topology.links)
+  assert.ok(after.charge.every(q => q === 0) && after.heat.every(h => h === 0))
+  assert.ok(after.burn.reduce((a, b) => a + b) > topology.burn.reduce((a, b) => a + b), 'repeated strikes burn deeper')
   assert.equal(growth.active, false)
-  assert.ok(growth.snapshot().charge.every(q => q === 0))
 })
 
-test('sparkling renders are deterministic, brighter at growing tips, and never affect growth randomness', () => {
+test('leader renders are deterministic, brightest at growing tips, and never affect growth randomness', () => {
   const terrain = scene(160, 160, () => [90, 105, 75, 255])
   const a = new Filaments(terrain, random()), b = new Filaments(terrain, random())
   a.plant(80, 80); b.plant(80, 80)
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 3; i++) {
     a.step(); b.step()
     assert.deepEqual(a.drawing(), a.drawing())
   }
   assert.deepEqual(a.snapshot(), b.snapshot())
-  assert.ok(a.drawing().nodes.some((v, i) => i % 7 === 6 && v > 0.75), 'tips should carry a bright deterministic spark')
+  assert.ok(a.drawing().nodes.some((v, i) => i % 8 === 3 && v > 0.7), 'tips should carry a hot leader')
 })
 
 test('cutting and clearing remove signals as well as living cells', () => {
@@ -176,6 +172,7 @@ test('cutting and clearing remove signals as well as living cells', () => {
   evolve(growth)
   growth.clear()
   assert.ok(growth.snapshot().charge.every(q => q === 0))
+  assert.ok(growth.snapshot().burn.every(b => b === 0))
   assert.equal(growth.active, false)
 })
 
@@ -217,20 +214,17 @@ test('removing a source de-energizes its component and cancels disconnected grow
   const size = growth.size
   evolve(growth, 600)
   assert.equal(growth.size, size, 'an isolated fragment must not heal from invisible power')
-  assert.ok(growth.snapshot().voltage.every(v => v === 0))
   assert.ok(growth.snapshot().charge.every(v => v === 0))
+  assert.ok(growth.snapshot().heat.every(v => v === 0))
   assert.equal(growth.active, false)
 })
 
-test('shutdown travels through branches instead of fading every line at once', () => {
+test('shutdown is one final discharge through every powered wire, then nothing is left', () => {
   const growth = new Filaments(scene(160, 160, () => [90, 105, 75, 255]), random())
   growth.plant(80, 80, 0.75); evolve(growth, 600)
-  growth.retire()
-  for (let i = 0; i < 12; i++) growth.step()
-  const { owner, voltage } = growth.snapshot()
-  const levels = voltage.filter((_, i) => owner[i] >= 0)
-  assert.ok(levels.some(v => v < 0.5), 'the power source should already be draining')
-  assert.ok(levels.some(v => v > 0.95), 'distant branches should still be lit')
+  growth.retire(); growth.step()
+  const { owner, charge } = growth.snapshot()
+  owner.forEach((id, cell) => { if (id >= 0) assert.ok(charge[cell] > 0) })
   evolve(growth, 600)
   assert.equal(growth.size, 0)
   assert.equal(growth.active, false)
@@ -242,11 +236,11 @@ test('returning during shutdown preserves topology and restores the surviving ne
   growth.plant(80, 80); evolve(growth)
   const topology = growth.snapshot()
   growth.retire()
-  for (let i = 0; i < 12; i++) growth.step()
+  for (let i = 0; i < 3; i++) growth.step()
   growth.resume(); evolve(growth, 600)
   assert.deepEqual(growth.snapshot().owner, topology.owner)
   assert.deepEqual(growth.snapshot().links, topology.links)
-  assert.ok(growth.snapshot().voltage.every((v, i) => topology.owner[i] < 0 || v === 1))
+  assert.ok(growth.snapshot().powered.every((v, i) => topology.owner[i] < 0 || v === 1))
   assert.equal(growth.active, false)
 })
 
@@ -257,7 +251,7 @@ test('surface-clipped drawings never illuminate the other side of a silhouette',
   const { nodes, edges, mask } = growth.drawing()
   assert.ok(nodes.length > 0)
   assert.ok(mask.every((v, i) => i % 160 < 80 || v === 0), 'even halo clipping stays on the originating surface')
-  assert.ok(edges.every(i => i < nodes.length / 7))
+  assert.ok(edges.every(i => i < nodes.length / 8))
 })
 
 test('painting is an exact view of living image cells, with no template or hidden fog', () => {
@@ -267,4 +261,49 @@ test('painting is an exact view of living image cells, with no template or hidde
   growth.paint(pixels)
   const { owner } = growth.snapshot()
   for (let i = 0; i < owner.length; i++) assert.equal(pixels[i * 4 + 3] > 0, owner[i] >= 0)
+})
+
+function staged(width: number, height: number, color: (x: number, y: number) => number[], map: (x: number, y: number) => number[]) {
+  const pixels = new Uint8ClampedArray(width * height * 4), scene = new Uint8ClampedArray(width * height * 4)
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    pixels.set(color(x, y), (y * width + x) * 4); scene.set([...map(x, y), 255], (y * width + x) * 4)
+  }
+  return new Terrain(width, height, pixels, scene)
+}
+
+test('a leader over cloth arcs through the air to nearby metal, strikes it, and runs along it', () => {
+  // Dark curtain; a bright vertical pole at x=100 that is 12 cells away from the seed.
+  const pole = (x: number) => x >= 99 && x <= 101
+  const terrain = staged(160, 160, x => pole(x) ? [200, 200, 205, 255] : [15, 12, 14, 255],
+    x => pole(x) ? [255, 128, 0] : [10, 128, 0])
+  const growth = new Filaments(terrain, random())
+  growth.plant(88, 80, 0.75)
+  let lit = false
+  for (let k = 0; k < 300 && growth.active; k++) {
+    growth.step()
+    const { owner, charge } = growth.snapshot()
+    lit ||= owner.some((id, i) => id >= 0 && pole(i % 160) && charge[i] > 0.5)
+  }
+  const points = occupied(growth, 160).filter(p => pole(p.x))
+  assert.ok(points.length > 20, 'current should take the metal')
+  assert.ok(Math.max(...points.map(p => p.y)) - Math.min(...points.map(p => p.y)) > 40, 'and travel along it')
+  assert.ok(lit, 'reaching metal fires a return stroke through it')
+})
+
+test('same-colored objects at different depths are separate surfaces', () => {
+  const terrain = staged(160, 160, () => [20, 20, 22, 255], x => [30, x < 80 ? 60 : 200, 0])
+  const growth = new Filaments(terrain, random())
+  growth.plant(70, 80, 0.75); evolve(growth, 600)
+  assert.ok(occupied(growth, 160).every(p => p.x < 80))
+  assert.ok(growth.size > 20)
+})
+
+test('the same strike chars cloth more deeply than metal', () => {
+  const scar = (conductance: number) => {
+    const growth = new Filaments(staged(160, 160, () => [90, 105, 75, 255], () => [conductance, 128, 0]), random())
+    growth.plant(80, 80); evolve(growth, 600)
+    const { owner, burn } = growth.snapshot(), cells = burn.filter((_, i) => owner[i] >= 0)
+    return cells.reduce((a, b) => a + b, 0) / cells.length
+  }
+  assert.ok(scar(15) > scar(255) * 1.5)
 })

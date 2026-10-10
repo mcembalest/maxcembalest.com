@@ -1,7 +1,9 @@
+import { STRIDE } from './filaments.ts'
+
 // Convert graph edges into rounded, tapered chains. Pure geometry, shared by rendering/tests.
 export interface Segment { node: number; ax: number; ay: number; cx: number; cy: number; bx: number; by: number }
 export function circuitPaths(nodes: Float32Array, edges: Uint32Array) {
-  const count = nodes.length / 7, adjacent: number[][] = Array.from({ length: count }, () => [])
+  const count = nodes.length / STRIDE, adjacent: number[][] = Array.from({ length: count }, () => [])
   for (let i = 0; i < edges.length; i += 2) {
     adjacent[edges[i]].push(edges[i + 1]); adjacent[edges[i + 1]].push(edges[i])
   }
@@ -24,9 +26,9 @@ export function circuitPaths(nodes: Float32Array, edges: Uint32Array) {
   const segments: Segment[] = []
   for (const chain of chains) chain.forEach((node, i) => {
     const previous = chain[Math.max(0, i - 1)], next = chain[Math.min(chain.length - 1, i + 1)]
-    const cx = nodes[node * 7], cy = nodes[node * 7 + 1]
-    segments.push({ node, ax: (nodes[previous * 7] + cx) / 2, ay: (nodes[previous * 7 + 1] + cy) / 2,
-      cx, cy, bx: (nodes[next * 7] + cx) / 2, by: (nodes[next * 7 + 1] + cy) / 2 })
+    const cx = nodes[node * STRIDE], cy = nodes[node * STRIDE + 1]
+    segments.push({ node, ax: (nodes[previous * STRIDE] + cx) / 2, ay: (nodes[previous * STRIDE + 1] + cy) / 2,
+      cx, cy, bx: (nodes[next * STRIDE] + cx) / 2, by: (nodes[next * STRIDE + 1] + cy) / 2 })
   })
   return { chains, segments }
 }

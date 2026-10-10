@@ -11,7 +11,7 @@ const SHUTDOWN_DELAY_MS = 1800
 export function plantGardens(photos: HTMLElement[]) {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
   const worker = new Worker(new URL('./garden.worker.ts', import.meta.url), { type: 'module' })
-  const send = (m: Message) => worker.postMessage(m, m.type === 'init' ? [m.pixels] : [])
+  const send = (m: Message) => worker.postMessage(m, m.type === 'init' ? [m.pixels, ...m.scene ? [m.scene] : []] : [])
   const renderers = new Map<number, CircuitRenderer>()
   const revisions = new Map<number, number>()
   worker.onmessage = (e: MessageEvent<Frame>) => {
@@ -25,12 +25,17 @@ export function plantGardens(photos: HTMLElement[]) {
     const img = photo.querySelector('img')
     if (!img) return
     img.draggable = false
-    const canvas = document.createElement('canvas')
-    canvas.className = 'garden'; canvas.setAttribute('aria-hidden', 'true'); photo.append(canvas)
-    const renderer = new CircuitRenderer(canvas)
+    const [scorch, light] = ['scorch', 'light'].map(layer => {
+      const canvas = document.createElement('canvas')
+      canvas.className = `garden ${layer}`; canvas.setAttribute('aria-hidden', 'true'); photo.append(canvas)
+      return canvas
+    })
+    const renderer = new CircuitRenderer(scorch, light)
     renderers.set(id, renderer)
     const sample = document.createElement('canvas'), sampleCtx = sample.getContext('2d', { willReadFrequently: true })!
+    const map = document.createElement('canvas'), mapCtx = map.getContext('2d', { willReadFrequently: true })!
     let width = 0, height = 0, source = '', ready = false, revision = 0
+    let scene: ImageBitmap | null = null
     let last: { x: number; y: number; t: number } | null = null
     let holding: { pointer: number; since: number } | null = null
     let lastAim = -Infinity, shutdownTimer = 0, outside = false
@@ -51,12 +56,25 @@ export function plantGardens(photos: HTMLElement[]) {
       sampleCtx.beginPath(); sampleCtx.rect(imageRect.left - rect.left, imageRect.top - rect.top, imageRect.width, imageRect.height); sampleCtx.clip()
       sampleCtx.drawImage(img, imageRect.left - rect.left + placement.x, imageRect.top - rect.top + placement.y, placement.width, placement.height)
       sampleCtx.restore()
+      // The scene map shares the photo's aspect ratio, so it lands under the same placement.
+      let sceneData: ArrayBuffer | undefined
+      if (scene) {
+        map.width = width; map.height = height
+        mapCtx.save(); mapCtx.scale(width / rect.width, height / rect.height)
+        mapCtx.drawImage(scene, imageRect.left - rect.left + placement.x, imageRect.top - rect.top + placement.y, placement.width, placement.height)
+        mapCtx.restore()
+        sceneData = mapCtx.getImageData(0, 0, width, height).data.buffer as ArrayBuffer
+      }
       try {
         const pixels = sampleCtx.getImageData(0, 0, width, height).data
-        send({ type: 'init', id, width, height, revision, pixels: pixels.buffer as ArrayBuffer }); ready = true
+        send({ type: 'init', id, width, height, revision, pixels: pixels.buffer as ArrayBuffer, scene: sceneData }); ready = true
       } catch { send({ type: 'clear', id }) } // never substitute a blind animation for an unreadable photo
     }
     img.addEventListener('load', size); size()
+    if (photo.dataset.scene) fetch(photo.dataset.scene).then(r => r.blob())
+      .then(blob => createImageBitmap(blob, { premultiplyAlpha: 'none', colorSpaceConversion: 'none' }))
+      .then(bitmap => { scene = bitmap; source = ''; size() })
+      .catch(() => {}) // without a map the substrate is still the photo itself
     const observer = new ResizeObserver(size); observer.observe(photo); observer.observe(img)
 
     const cellAt = (x: number, y: number) => ({ x: x * width / photo.clientWidth, y: y * height / photo.clientHeight })

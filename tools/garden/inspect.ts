@@ -14,7 +14,9 @@ for (const scene of [
   const { data, info } = await sharp(resolve('src/assets/personal', `${scene.name}.png`))
     .resize({ width: scene.width }).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
   const source = new Uint8ClampedArray(data)
-  const terrain = new Terrain(info.width, info.height, source)
+  const map = await sharp(resolve('src/assets/personal', `${scene.name}.materials.png`))
+    .resize(info.width, info.height, { fit: 'fill' }).ensureAlpha().raw().toBuffer()
+  const terrain = new Terrain(info.width, info.height, source, new Uint8ClampedArray(map))
   let rng = 42
   const random = () => ((rng = (Math.imul(rng, 1664525) + 1013904223) >>> 0) / 2 ** 32)
   const growth = new Filaments(terrain, random)
